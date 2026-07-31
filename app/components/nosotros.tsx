@@ -1,44 +1,59 @@
 import Image from "next/image";
 import { Carrusel, type Diapositiva } from "./carrusel";
-import { BoltIcon, EyeIcon } from "./icons";
 
 const galeriaComunidad: Diapositiva[] = [
   {
-    src: "/nosotros/comunidad-1.png",
-    alt: "Profesional de RaícesCare registrando datos junto a una familia amazónica que sostiene un plantón",
+    src: "/nosotros/pieza-1.png",
+    alt: "Quiénes Somos: una organización dedicada a la asistencia social, educación, cultura e investigación científica, promoviendo el desarrollo humano y la sostenibilidad en el país, especialmente en personas en condición de pobreza o pobreza extrema y en la Amazonía. Ámbitos: asistencia social y ayuda humanitaria; educación, capacitación y cultura; investigación científica e ingeniería verde; alianzas y cooperación internacional",
   },
   {
-    src: "/nosotros/comunidad-2.png",
-    alt: "Trabajadora de RaícesCare compartiendo material informativo con una familia a orillas del río",
+    src: "/nosotros/pieza-2.png",
+    alt: "Quiénes Somos: una organización dedicada a la asistencia social, educación, cultura e investigación científica, junto a una familia amazónica que revisa material informativo de RaícesCare",
   },
   {
-    src: "/nosotros/comunidad-3.png",
-    alt: "Voluntaria de RaícesCare entregando un plantón a dos niños de una comunidad nativa",
+    src: "/nosotros/pieza-3.png",
+    alt: "Quiénes Somos: una organización dedicada a la asistencia social, educación, cultura e investigación científica, junto a una voluntaria de RaícesCare que entrega un plantón a dos niños de la comunidad",
+  },
+];
+
+const misionVision = [
+  {
+    src: "/nosotros/mision.png",
+    alt: "Nuestra Misión: promover el desarrollo humano, la educación y la sostenibilidad en el Perú, mediante la asistencia social directa, la educación técnica y la investigación científica aplicada",
+  },
+  {
+    src: "/nosotros/vision.png",
+    alt: "Nuestra Visión: ser la ONGD líder y referente en Latinoamérica por integrar tecnología de trazabilidad digital, preservación cultural originaria y modelos de desarrollo comunitario sostenibles e inalterables",
   },
 ];
 
 const valores = [
   {
+    imagen: "/valores/transparencia-radical.png",
     titulo: "Transparencia Radical",
     texto:
-      "Adheridos estrictamente a normativas UIF, SUNAT y APCI con cumplimiento de origen de fondos.",
+      "Adheridos estrictamente a normativas UIF, SUNAT y APCI con cumplimiento de origen de fondos. Cumplimiento normativo, trazabilidad de fondos 100% verificable, reportes auditables y públicos, y compromiso con la ética y la rendición de cuentas.",
   },
   {
+    imagen: "/valores/empatia-comunitaria.png",
     titulo: "Empatía Comunitaria",
     texto:
       "Respeto profundo por las comunidades nativas y sus saberes ancestrales.",
   },
   {
+    imagen: "/valores/sostenibilidad-cientifica.png",
     titulo: "Sostenibilidad Científica",
     texto:
       "Soluciones de ingeniería verde basadas en datos e investigación real.",
   },
   {
+    imagen: "/valores/trabajo-en-red.png",
     titulo: "Trabajo en Red",
     texto:
       "Co-creación con la cooperación técnica internacional y el sector privado.",
   },
   {
+    imagen: "/valores/innovacion-social.png",
     titulo: "Innovación Social",
     texto:
       "Herramientas de bio-inteligencia al servicio del bienestar humano.",
@@ -53,15 +68,15 @@ const equipo = [
     enfoque: "Gestión de operaciones, bio-inteligencia e impacto tecnológico.",
   },
   {
-    foto: "/equipo/wilyam-lucar.png",
-    nombre: "Wilyam Abelardo Lúcar Aliaga",
-    cargo: "Director Ejecutivo Adjunto | Abogado",
+    foto: "/equipo/wyliam-lucar.png",
+    nombre: "Wyliam Lúcar Aliaga",
+    cargo: "Director Adjunto | Abogado",
     enfoque: "Cumplimiento legal, alianzas institucionales y convenios.",
   },
   {
     foto: "/equipo/rosa-galvez.png",
     nombre: "Rosa Amelia Gálvez Rojas de Pilón",
-    cargo: "Directora de Admin. y Finanzas | Abogada y Contadora",
+    cargo: "Directora de Finanzas | Abogada y Contador Mercantil",
     enfoque: "Control de fondos, auditoría de la DAF e inmunidad financiera.",
   },
 ];
@@ -69,78 +84,57 @@ const equipo = [
 export function Nosotros() {
   return (
     <section id="nosotros" className="relative bg-white px-6 py-20 md:px-12">
-      <Image
-        src="/nosotros-fondo.png"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover object-top opacity-60"
+      <div
+        className="absolute inset-0 bg-[url('/nosotros-fondo.png')] bg-cover bg-fixed bg-center bg-no-repeat"
+        aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-linear-to-b from-white/70 via-white/85 to-white"
+        className="absolute inset-0 bg-linear-to-b from-white/55 via-white/75 to-white/90"
         aria-hidden="true"
       />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="mb-20 grid grid-cols-1 gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <h2 className="mb-6 inline-block border-b-2 border-verde-hoja pb-2 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
-              Quiénes Somos
-            </h2>
-            <p className="text-justify text-lg leading-relaxed text-gray-700">
-              Una organización que tiene como objeto dedicarse a fines de
-              asistencia social, educación, cultura e investigación científica,
-              promoviendo el desarrollo humano y la sostenibilidad en el país,
-              en especial de personas en condición de pobreza o pobreza extrema
-              y en la Amazonía.
-            </p>
-            <p className="mt-4 text-justify leading-relaxed text-gray-700">
-              Un equipo multidisciplinario de ingenieros, abogados y científicos
-              comprometidos con la dignidad humana y la Amazonía.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 content-start gap-6 md:grid-cols-2 lg:col-span-7">
-            <div className="rounded-xl border-t-4 border-verde-hoja bg-gris-niebla p-8 shadow-sm">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="rounded-full bg-verde-hoja/20 p-3 text-verde-hoja">
-                  <BoltIcon />
-                </span>
-                <h3 className="font-montserrat text-2xl font-bold text-azul-confianza">
-                  Nuestra Misión
-                </h3>
-              </div>
-              <p className="text-sm leading-relaxed text-gray-700">
-                Promover el desarrollo humano, la educación y la sostenibilidad
-                en el Perú, mediante la asistencia social directa, la educación
-                técnica y la investigación científica aplicada.
-              </p>
-            </div>
-
-            <div className="rounded-xl border-t-4 border-azul-confianza bg-gris-niebla p-8 shadow-sm">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="rounded-full bg-azul-confianza/20 p-3 text-azul-confianza">
-                  <EyeIcon />
-                </span>
-                <h3 className="font-montserrat text-2xl font-bold text-azul-confianza">
-                  Nuestra Visión
-                </h3>
-              </div>
-              <p className="text-sm leading-relaxed text-gray-700">
-                Ser la ONGD líder y referente en Latinoamérica por integrar
-                tecnología de trazabilidad digital, preservación cultural
-                originaria y modelos de desarrollo comunitario sostenibles e
-                inalterables.
-              </p>
-            </div>
-          </div>
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <h2 className="mb-6 inline-block border-b-2 border-verde-hoja pb-2 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
+            Quiénes Somos
+          </h2>
+          <p className="text-lg leading-relaxed text-gray-700">
+            Una organización que tiene como objeto dedicarse a fines de
+            asistencia social, educación, cultura e investigación científica,
+            promoviendo el desarrollo humano y la sostenibilidad en el país, en
+            especial de personas en condición de pobreza o pobreza extrema y en
+            la Amazonía.
+          </p>
+          <p className="mt-4 leading-relaxed text-gray-700">
+            Un equipo multidisciplinario de ingenieros, abogados y científicos
+            comprometidos con la dignidad humana y la Amazonía.
+          </p>
         </div>
 
-        <div className="mb-20">
+        <div className="mx-auto mb-20 max-w-4xl">
           <Carrusel
             diapositivas={galeriaComunidad}
-            etiqueta="Nuestro trabajo con las comunidades amazónicas"
+            etiqueta="Quiénes somos: nuestro trabajo con las comunidades amazónicas"
+            proporcion="aspect-4/3"
           />
+        </div>
+
+        <div className="mb-20 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {misionVision.map((pieza) => (
+            <div
+              key={pieza.src}
+              className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm"
+            >
+              <Image
+                src={pieza.src}
+                alt={pieza.alt}
+                width={1672}
+                height={941}
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
+          ))}
         </div>
 
         <div className="mb-20">
@@ -149,18 +143,20 @@ export function Nosotros() {
               Valores Institucionales
             </h2>
           </div>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             {valores.map((valor) => (
               <li
                 key={valor.titulo}
-                className="rounded-xl border border-gray-200 bg-white/90 p-6 shadow-sm"
+                className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm"
               >
-                <h3 className="mb-2 font-montserrat text-base font-bold text-verde-bosque">
-                  {valor.titulo}
-                </h3>
-                <p className="text-sm leading-relaxed text-gray-600">
-                  {valor.texto}
-                </p>
+                <Image
+                  src={valor.imagen}
+                  alt={`${valor.titulo}: ${valor.texto}`}
+                  width={1672}
+                  height={941}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="h-auto w-full"
+                />
               </li>
             ))}
           </ul>
@@ -172,32 +168,23 @@ export function Nosotros() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {equipo.map((persona) => (
-            <div
+            <li
               key={persona.nombre}
-              className="flex items-start gap-5 rounded-xl border border-gray-200 bg-white p-6 text-left shadow-sm transition-shadow hover:shadow-lg"
+              className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
             >
               <Image
                 src={persona.foto}
-                alt={`Retrato de ${persona.nombre}`}
-                width={600}
-                height={750}
-                sizes="128px"
-                className="h-36 w-28 shrink-0 rounded-xl bg-gris-niebla object-cover object-top shadow-sm"
+                alt={`${persona.nombre}, ${persona.cargo}. ${persona.enfoque}`}
+                width={1448}
+                height={1086}
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                className="h-auto w-full"
               />
-              <div>
-                <h3 className="font-montserrat text-lg leading-tight font-bold text-azul-confianza">
-                  {persona.nombre}
-                </h3>
-                <p className="mb-2 text-sm font-semibold text-verde-hoja">
-                  {persona.cargo}
-                </p>
-                <p className="text-xs text-gray-600">{persona.enfoque}</p>
-              </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

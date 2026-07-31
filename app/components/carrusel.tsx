@@ -12,6 +12,8 @@ export type Diapositiva = {
 type CarruselProps = {
   diapositivas: Diapositiva[];
   etiqueta: string;
+  /** Proporción del marco; debe coincidir con la de las piezas. */
+  proporcion?: string;
   /** Milisegundos entre cambios automáticos. */
   intervalo?: number;
 };
@@ -19,6 +21,7 @@ type CarruselProps = {
 export function Carrusel({
   diapositivas,
   etiqueta,
+  proporcion = "aspect-4/3",
   intervalo = 6000,
 }: CarruselProps) {
   const total = diapositivas.length;
@@ -46,7 +49,7 @@ export function Carrusel({
       role="group"
       aria-roledescription="carrusel"
       aria-label={etiqueta}
-      className="relative aspect-4/3 w-full overflow-hidden rounded-2xl shadow-lg sm:aspect-16/9 lg:aspect-21/9"
+      className={`relative w-full overflow-hidden rounded-2xl bg-white shadow-lg ${proporcion}`}
       onMouseEnter={() => setEnPausa(true)}
       onMouseLeave={() => setEnPausa(false)}
       onFocusCapture={() => setEnPausa(true)}
@@ -68,8 +71,8 @@ export function Carrusel({
             src={diapositiva.src}
             alt={diapositiva.alt}
             fill
-            sizes="(min-width: 1280px) 1280px, 100vw"
-            className="object-cover object-[center_40%]"
+            sizes="(min-width: 1024px) 1024px, 100vw"
+            className="object-contain"
             priority={indice === 0}
           />
         </div>

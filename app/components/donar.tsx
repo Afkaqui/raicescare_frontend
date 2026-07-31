@@ -3,17 +3,12 @@
 import Image from "next/image";
 import { useState } from "react";
 import { contactHref, site } from "../site-config";
-import { BoltIcon, LockIcon, RefreshIcon } from "./icons";
+import { LockIcon } from "./icons";
 
 type PlanProps = {
   imagen: string;
   alt: string;
-  Icon: typeof BoltIcon;
-  iconColor: string;
   titulo: string;
-  lema: string;
-  lemaColor: string;
-  descripcion: string;
   montos: number[];
   bordeSuperior: string;
   montoActivo: string;
@@ -25,14 +20,9 @@ type PlanProps = {
 
 const planes: PlanProps[] = [
   {
-    imagen: "/donaciones/plan-mensual.png",
-    alt: "Manos sosteniendo un brote de árbol en tierra fértil",
-    Icon: RefreshIcon,
-    iconColor: "text-verde-hoja",
+    imagen: "/donaciones/pieza-mensual.png",
+    alt: "Socio Recurrente «Sembrador de Futuro»: aporte mensual automatizado de alto impacto, junto a unas manos que sostienen un brote de árbol en tierra fértil",
     titulo: "SOCIO RECURRENTE",
-    lema: "«Sembrador de Futuro»",
-    lemaColor: "text-verde-bosque",
-    descripcion: "Aporte mensual automatizado de alto impacto.",
     montos: [30, 50, 100],
     bordeSuperior: "border-verde-hoja",
     montoActivo: "bg-verde-hoja text-white",
@@ -42,14 +32,9 @@ const planes: PlanProps[] = [
     asunto: (monto) => `Quiero ser Socio Recurrente: S/ ${monto} mensuales`,
   },
   {
-    imagen: "/donaciones/aporte-unico.png",
-    alt: "Manos sosteniendo un brote de árbol sobre la selva amazónica",
-    Icon: BoltIcon,
-    iconColor: "text-tierra-amazonica",
+    imagen: "/donaciones/pieza-unica.png",
+    alt: "Donación Única «Aporte Inmediato de Impacto»: tú eliges el monto a aportar para emergencias, junto a unas manos que sostienen un brote de árbol sobre la selva amazónica",
     titulo: "DONACIÓN ÚNICA",
-    lema: "«Aporte Inmediato de Impacto»",
-    lemaColor: "text-tierra-amazonica",
-    descripcion: "Tú eliges el monto a aportar para emergencias.",
     montos: [50, 200, 500],
     bordeSuperior: "border-azul-confianza",
     montoActivo: "bg-azul-confianza text-white",
@@ -67,26 +52,16 @@ function PlanDonacion(plan: PlanProps) {
     <div
       className={`overflow-hidden rounded-2xl border-t-8 bg-white text-center text-gray-800 shadow-2xl md:-translate-y-2 ${plan.bordeSuperior}`}
     >
-      <div className="relative h-56 w-full">
-        <Image
-          src={plan.imagen}
-          alt={plan.alt}
-          fill
-          sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover object-center"
-        />
-      </div>
+      <Image
+        src={plan.imagen}
+        alt={plan.alt}
+        width={1448}
+        height={1086}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        className="h-auto w-full"
+      />
 
       <div className="p-8">
-        <div className="mb-2 flex items-center justify-center gap-2 text-azul-confianza">
-          <plan.Icon className={`h-6 w-6 ${plan.iconColor}`} />
-          <h3 className="font-montserrat text-2xl font-bold">{plan.titulo}</h3>
-        </div>
-        <p className={`mb-2 text-xl font-semibold ${plan.lemaColor}`}>
-          {plan.lema}
-        </p>
-        <p className="mb-8 text-sm text-gray-500">{plan.descripcion}</p>
-
         <fieldset className="mb-8">
           <legend className="sr-only">
             Elige tu monto para {plan.titulo.toLowerCase()}

@@ -163,15 +163,14 @@ export function Programas() {
                 key={programa.titulo}
                 className={`flex flex-col overflow-hidden rounded-xl border-t-4 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl ${acento.borde}`}
               >
-                <div className="relative h-44 w-full">
-                  <Image
-                    src={programa.imagen}
-                    alt={programa.alt}
-                    fill
-                    sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
-                  />
-                </div>
+                <Image
+                  src={programa.imagen}
+                  alt={programa.alt}
+                  width={1672}
+                  height={941}
+                  sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  className="h-auto w-full"
+                />
 
                 <div className="flex flex-1 flex-col p-8">
                   <span

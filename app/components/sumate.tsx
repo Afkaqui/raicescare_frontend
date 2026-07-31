@@ -1,50 +1,30 @@
 import Image from "next/image";
 import { contactHref } from "../site-config";
-import {
-  ArrowRightIcon,
-  MegaphoneIcon,
-  ScaleIcon,
-  UserGroupIcon,
-} from "./icons";
+import { ArrowRightIcon } from "./icons";
 
 const bloques = [
   {
-    Icon: UserGroupIcon,
-    imagen: "/sumate/voluntariado.png",
-    alt: "Voluntarios de RaícesCare conversando con una pobladora en una comunidad amazónica",
-    titulo: "1. Voluntariado en Campo",
-    descripcion:
-      "Intervención directa en comunidades y proyectos en la selva.",
+    imagen: "/sumate/pieza-voluntariado.png",
+    alt: "1. Voluntariado en Campo: intervención directa en comunidades y proyectos en la selva. Voluntarios de RaícesCare conversando con una pobladora amazónica",
     cta: "Postula al Voluntariado",
     asunto: "Postulación al Voluntariado en Campo",
     borde: "border-verde-hoja",
-    fondo: "bg-verde-hoja/10",
     texto: "text-verde-hoja",
   },
   {
-    Icon: ScaleIcon,
-    imagen: "/sumate/pro-bono.png",
-    alt: "Profesionales voluntarios trabajando en un proyecto pro bono para RaícesCare",
-    titulo: "2. Apoyo Pro Bono",
-    descripcion:
-      "Para estudiantes y profesionales de derecho, ingeniería y sistemas.",
+    imagen: "/sumate/pieza-pro-bono.png",
+    alt: "2. Apoyo Pro Bono: para estudiantes y profesionales de derecho, ingeniería y sistemas. Equipo de profesionales voluntarios trabajando en un proyecto de RaícesCare",
     cta: "Ver Convocatorias",
     asunto: "Consulta por convocatorias Pro Bono",
     borde: "border-azul-confianza",
-    fondo: "bg-azul-confianza/10",
     texto: "text-azul-confianza",
   },
   {
-    Icon: MegaphoneIcon,
-    imagen: "/sumate/embajadores.png",
-    alt: "Embajadora de RaícesCare grabando un mensaje para difundir la causa",
-    titulo: "3. Embajadores",
-    descripcion:
-      "Difunde nuestra causa, organiza colectas y sé la voz de la Amazonía.",
+    imagen: "/sumate/pieza-embajadores.png",
+    alt: "3. Embajadores: difunde nuestra causa, organiza colectas y sé la voz de la Amazonía. Embajadora de RaícesCare grabando un mensaje para difundir la causa",
     cta: "Kit de Embajador",
     asunto: "Solicito el Kit de Embajador de la Raíz",
     borde: "border-tierra-amazonica",
-    fondo: "bg-tierra-amazonica/10",
     texto: "text-tierra-amazonica",
   },
 ];
@@ -61,44 +41,30 @@ export function Sumate() {
           Encuentra tu lugar en nuestra red.
         </p>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {bloques.map((bloque) => (
-            <article
-              key={bloque.titulo}
-              className={`overflow-hidden rounded-xl border-t-4 bg-white shadow-md transition-transform hover:-translate-y-1 ${bloque.borde}`}
+            <li
+              key={bloque.imagen}
+              className={`flex flex-col overflow-hidden rounded-xl border-t-4 bg-white shadow-md transition-transform hover:-translate-y-1 ${bloque.borde}`}
             >
-              <div className="relative h-48 w-full">
-                <Image
-                  src={bloque.imagen}
-                  alt={bloque.alt}
-                  fill
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                  className="object-cover object-center"
-                />
-              </div>
-              <div className="p-8">
-                <span
-                  className={`mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full ${bloque.fondo} ${bloque.texto}`}
-                >
-                  <bloque.Icon className="h-8 w-8" />
-                </span>
-                <h3 className="mb-3 font-montserrat text-xl font-bold text-azul-confianza">
-                  {bloque.titulo}
-                </h3>
-                <p className="mb-6 min-h-10 text-sm text-gray-600">
-                  {bloque.descripcion}
-                </p>
-                <a
-                  href={contactHref(bloque.asunto)}
-                  className={`flex items-center justify-center gap-2 font-bold hover:underline ${bloque.texto}`}
-                >
-                  {bloque.cta}
-                  <ArrowRightIcon className="h-4 w-4" />
-                </a>
-              </div>
-            </article>
+              <Image
+                src={bloque.imagen}
+                alt={bloque.alt}
+                width={1448}
+                height={1086}
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                className="h-auto w-full"
+              />
+              <a
+                href={contactHref(bloque.asunto)}
+                className={`flex items-center justify-center gap-2 p-6 font-bold hover:underline ${bloque.texto}`}
+              >
+                {bloque.cta}
+                <ArrowRightIcon className="h-4 w-4" />
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
