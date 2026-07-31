@@ -161,6 +161,22 @@ export function ArrowRightIcon(props: IconProps) {
   );
 }
 
+export function ChevronLeftIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M15 19l-7-7 7-7" />
+    </Outline>
+  );
+}
+
+export function ChevronRightIcon(props: IconProps) {
+  return (
+    <Outline {...props}>
+      <path d="M9 5l7 7-7 7" />
+    </Outline>
+  );
+}
+
 export function ExternalLinkIcon(props: IconProps) {
   return (
     <Outline {...props}>

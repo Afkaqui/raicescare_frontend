@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { site } from "../site-config";
-import { LinkedInIcon, MailIcon, MapPinIcon } from "./icons";
+import { BuildingIcon, LinkedInIcon, MailIcon, MapPinIcon } from "./icons";
 
 const accesos = [
   { href: "#inicio", label: "Inicio" },
@@ -54,7 +54,21 @@ export function SiteFooter() {
             </li>
             <li className="flex items-start gap-3">
               <MapPinIcon className="h-5 w-5 shrink-0 text-verde-hoja" />
-              <span>Sede Operativa: {site.address}</span>
+              <span>
+                <strong className="font-semibold text-white">
+                  Sede Operativa:
+                </strong>{" "}
+                {site.sedeOperativa}
+              </span>
+            </li>
+            <li className="flex items-start gap-3">
+              <BuildingIcon className="h-5 w-5 shrink-0 text-verde-hoja" />
+              <span>
+                <strong className="font-semibold text-white">
+                  Sede Legal:
+                </strong>{" "}
+                {site.sedeLegal}
+              </span>
             </li>
             <li className="flex items-center gap-3">
               <LinkedInIcon className="h-5 w-5 shrink-0 text-verde-hoja" />

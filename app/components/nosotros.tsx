@@ -1,5 +1,21 @@
 import Image from "next/image";
+import { Carrusel, type Diapositiva } from "./carrusel";
 import { BoltIcon, EyeIcon } from "./icons";
+
+const galeriaComunidad: Diapositiva[] = [
+  {
+    src: "/nosotros/comunidad-1.png",
+    alt: "Profesional de RaícesCare registrando datos junto a una familia amazónica que sostiene un plantón",
+  },
+  {
+    src: "/nosotros/comunidad-2.png",
+    alt: "Trabajadora de RaícesCare compartiendo material informativo con una familia a orillas del río",
+  },
+  {
+    src: "/nosotros/comunidad-3.png",
+    alt: "Voluntaria de RaícesCare entregando un plantón a dos niños de una comunidad nativa",
+  },
+];
 
 const valores = [
   {
@@ -120,13 +136,10 @@ export function Nosotros() {
           </div>
         </div>
 
-        <div className="relative mb-20 aspect-21/9 w-full overflow-hidden rounded-2xl shadow-lg">
-          <Image
-            src="/nosotros-comunidad.png"
-            alt="Trabajadora de RaícesCare compartiendo material informativo con una familia amazónica"
-            fill
-            sizes="(min-width: 1280px) 1280px, 100vw"
-            className="object-cover object-top"
+        <div className="mb-20">
+          <Carrusel
+            diapositivas={galeriaComunidad}
+            etiqueta="Nuestro trabajo con las comunidades amazónicas"
           />
         </div>
 
