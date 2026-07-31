@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { contactHref } from "../site-config";
 import {
   ArrowRightIcon,
@@ -9,6 +10,8 @@ import {
 const bloques = [
   {
     Icon: UserGroupIcon,
+    imagen: "/sumate/voluntariado.png",
+    alt: "Voluntarios de RaícesCare conversando con una pobladora en una comunidad amazónica",
     titulo: "1. Voluntariado en Campo",
     descripcion:
       "Intervención directa en comunidades y proyectos en la selva.",
@@ -20,6 +23,8 @@ const bloques = [
   },
   {
     Icon: ScaleIcon,
+    imagen: "/sumate/pro-bono.png",
+    alt: "Profesionales voluntarios trabajando en un proyecto pro bono para RaícesCare",
     titulo: "2. Apoyo Pro Bono",
     descripcion:
       "Para estudiantes y profesionales de derecho, ingeniería y sistemas.",
@@ -31,6 +36,8 @@ const bloques = [
   },
   {
     Icon: MegaphoneIcon,
+    imagen: "/sumate/embajadores.png",
+    alt: "Embajadora de RaícesCare grabando un mensaje para difundir la causa",
     titulo: "3. Embajadores",
     descripcion:
       "Difunde nuestra causa, organiza colectas y sé la voz de la Amazonía.",
@@ -58,26 +65,37 @@ export function Sumate() {
           {bloques.map((bloque) => (
             <article
               key={bloque.titulo}
-              className={`rounded-xl border-t-4 bg-white p-8 shadow-md transition-transform hover:-translate-y-1 ${bloque.borde}`}
+              className={`overflow-hidden rounded-xl border-t-4 bg-white shadow-md transition-transform hover:-translate-y-1 ${bloque.borde}`}
             >
-              <span
-                className={`mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full ${bloque.fondo} ${bloque.texto}`}
-              >
-                <bloque.Icon className="h-8 w-8" />
-              </span>
-              <h3 className="mb-3 font-montserrat text-xl font-bold text-azul-confianza">
-                {bloque.titulo}
-              </h3>
-              <p className="mb-6 min-h-10 text-sm text-gray-600">
-                {bloque.descripcion}
-              </p>
-              <a
-                href={contactHref(bloque.asunto)}
-                className={`flex items-center justify-center gap-2 font-bold hover:underline ${bloque.texto}`}
-              >
-                {bloque.cta}
-                <ArrowRightIcon className="h-4 w-4" />
-              </a>
+              <div className="relative h-48 w-full">
+                <Image
+                  src={bloque.imagen}
+                  alt={bloque.alt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="p-8">
+                <span
+                  className={`mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full ${bloque.fondo} ${bloque.texto}`}
+                >
+                  <bloque.Icon className="h-8 w-8" />
+                </span>
+                <h3 className="mb-3 font-montserrat text-xl font-bold text-azul-confianza">
+                  {bloque.titulo}
+                </h3>
+                <p className="mb-6 min-h-10 text-sm text-gray-600">
+                  {bloque.descripcion}
+                </p>
+                <a
+                  href={contactHref(bloque.asunto)}
+                  className={`flex items-center justify-center gap-2 font-bold hover:underline ${bloque.texto}`}
+                >
+                  {bloque.cta}
+                  <ArrowRightIcon className="h-4 w-4" />
+                </a>
+              </div>
             </article>
           ))}
         </div>

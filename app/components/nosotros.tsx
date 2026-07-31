@@ -31,21 +31,21 @@ const valores = [
 
 const equipo = [
   {
-    iniciales: "EN",
+    foto: "/equipo/eduardo-noriega.png",
     nombre: "Eduardo José Noriega Campos",
     cargo: "Director Ejecutivo | Ingeniero Industrial",
     enfoque: "Gestión de operaciones, bio-inteligencia e impacto tecnológico.",
   },
   {
-    iniciales: "WL",
+    foto: "/equipo/wilyam-lucar.png",
     nombre: "Wilyam Abelardo Lúcar Aliaga",
     cargo: "Director Ejecutivo Adjunto | Abogado",
     enfoque: "Cumplimiento legal, alianzas institucionales y convenios.",
   },
   {
-    iniciales: "RG",
+    foto: "/equipo/rosa-galvez.png",
     nombre: "Rosa Amelia Gálvez Rojas de Pilón",
-    cargo: "Directora de Admin. y Finanzas | Abogada",
+    cargo: "Directora de Admin. y Finanzas | Abogada y Contadora",
     enfoque: "Control de fondos, auditoría de la DAF e inmunidad financiera.",
   },
 ];
@@ -84,7 +84,7 @@ export function Nosotros() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:col-span-7">
+          <div className="grid grid-cols-1 content-start gap-6 md:grid-cols-2 lg:col-span-7">
             <div className="rounded-xl border-t-4 border-verde-hoja bg-gris-niebla p-8 shadow-sm">
               <div className="mb-4 flex items-center gap-3">
                 <span className="rounded-full bg-verde-hoja/20 p-3 text-verde-hoja">
@@ -120,6 +120,16 @@ export function Nosotros() {
           </div>
         </div>
 
+        <div className="relative mb-20 aspect-21/9 w-full overflow-hidden rounded-2xl shadow-lg">
+          <Image
+            src="/nosotros-comunidad.png"
+            alt="Trabajadora de RaícesCare compartiendo material informativo con una familia amazónica"
+            fill
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            className="object-cover object-top"
+          />
+        </div>
+
         <div className="mb-20">
           <div className="mb-10 text-center">
             <h2 className="inline-block border-b-2 border-verde-hoja pb-2 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
@@ -152,15 +162,17 @@ export function Nosotros() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {equipo.map((persona) => (
             <div
-              key={persona.iniciales}
-              className="flex items-start gap-4 rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg"
+              key={persona.nombre}
+              className="flex items-start gap-5 rounded-xl border border-gray-200 bg-white p-6 text-left shadow-sm transition-shadow hover:shadow-lg"
             >
-              <span
-                className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-verde-bosque font-montserrat text-2xl font-bold text-white shadow-inner"
-                aria-hidden="true"
-              >
-                {persona.iniciales}
-              </span>
+              <Image
+                src={persona.foto}
+                alt={`Retrato de ${persona.nombre}`}
+                width={600}
+                height={750}
+                sizes="128px"
+                className="h-36 w-28 shrink-0 rounded-xl bg-gris-niebla object-cover object-top shadow-sm"
+              />
               <div>
                 <h3 className="font-montserrat text-lg leading-tight font-bold text-azul-confianza">
                   {persona.nombre}

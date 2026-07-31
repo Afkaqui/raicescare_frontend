@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { contactHref, site } from "../site-config";
 import {
   BuildingIcon,
@@ -167,85 +168,118 @@ export function Transparencia() {
           </p>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            <article className="rounded-xl border border-gray-200 border-t-4 border-t-verde-hoja bg-white p-6 shadow-sm transition hover:shadow-md">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-verde-hoja/10 text-verde-hoja">
-                  <BuildingIcon />
-                </span>
-                <h4 className="text-lg font-bold text-azul-confianza">
-                  Inscripción SUNARP
-                </h4>
+            <article className="overflow-hidden rounded-xl border border-gray-200 border-t-4 border-t-verde-hoja bg-white shadow-sm transition hover:shadow-md">
+              <FotoLegal
+                src="/legal/sunarp.png"
+                alt="Partida registral de RaícesCare inscrita en la Zona Registral N° VI de Pucallpa"
+              />
+              <div className="p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-verde-hoja/10 text-verde-hoja">
+                    <BuildingIcon />
+                  </span>
+                  <h4 className="text-lg font-bold text-azul-confianza">
+                    Inscripción SUNARP
+                  </h4>
+                </div>
+                <ul className="mb-4 space-y-1 text-sm text-gray-600">
+                  <li>
+                    <strong>Partida Registral:</strong> N°{" "}
+                    {site.partidaRegistral}
+                  </li>
+                  <li>
+                    <strong>Jurisdicción:</strong> {site.zonaRegistral}
+                  </li>
+                  <li>
+                    <strong>Sede:</strong> Pucallpa - Ucayali
+                  </li>
+                </ul>
+                <DocumentoLink href="/documentos/certificado-literal-sunarp.pdf">
+                  Ver Certificado Literal
+                </DocumentoLink>
               </div>
-              <ul className="mb-4 space-y-1 text-sm text-gray-600">
-                <li>
-                  <strong>Partida Registral:</strong> N° {site.partidaRegistral}
-                </li>
-                <li>
-                  <strong>Jurisdicción:</strong> {site.zonaRegistral}
-                </li>
-                <li>
-                  <strong>Sede:</strong> Pucallpa - Ucayali
-                </li>
-              </ul>
-              <DocumentoLink href="/documentos/certificado-literal-sunarp.pdf">
-                Ver Certificado Literal
-              </DocumentoLink>
             </article>
 
-            <article className="rounded-xl border border-gray-200 border-t-4 border-t-azul-confianza bg-white p-6 shadow-sm transition hover:shadow-md">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-azul-confianza/10 text-azul-confianza">
-                  <DocumentIcon />
-                </span>
-                <h4 className="text-lg font-bold text-azul-confianza">
-                  Registro SUNAT
-                </h4>
+            <article className="overflow-hidden rounded-xl border border-gray-200 border-t-4 border-t-azul-confianza bg-white shadow-sm transition hover:shadow-md">
+              <FotoLegal
+                src="/legal/sunat.png"
+                alt="Tablero institucional de cumplimiento legal de RaícesCare junto a documentación oficial"
+              />
+              <div className="p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-azul-confianza/10 text-azul-confianza">
+                    <DocumentIcon />
+                  </span>
+                  <h4 className="text-lg font-bold text-azul-confianza">
+                    Registro SUNAT
+                  </h4>
+                </div>
+                <ul className="mb-4 space-y-1 text-sm text-gray-600">
+                  <li>
+                    <strong>RUC:</strong> {site.ruc}
+                  </li>
+                  <li>
+                    <strong>Estado:</strong> Activo / Habido
+                  </li>
+                  <li>
+                    <strong>Beneficio:</strong> Exoneración Renta/IGV
+                  </li>
+                </ul>
+                <DocumentoLink href="/documentos/ficha-ruc-sunat.pdf">
+                  Ver Ficha RUC Oficial
+                </DocumentoLink>
               </div>
-              <ul className="mb-4 space-y-1 text-sm text-gray-600">
-                <li>
-                  <strong>RUC:</strong> {site.ruc}
-                </li>
-                <li>
-                  <strong>Estado:</strong> Activo / Habido
-                </li>
-                <li>
-                  <strong>Beneficio:</strong> Exoneración Renta/IGV
-                </li>
-              </ul>
-              <DocumentoLink href="/documentos/ficha-ruc-sunat.pdf">
-                Ver Ficha RUC Oficial
-              </DocumentoLink>
             </article>
 
-            <article className="rounded-xl border border-gray-200 border-t-4 border-t-verde-bosque bg-white p-6 shadow-sm transition hover:shadow-md">
-              <div className="mb-4 flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-tierra-amazonica/10 text-tierra-amazonica">
-                  <ScaleIcon />
-                </span>
-                <h4 className="text-lg font-bold text-azul-confianza">
-                  Estatutos &amp; UIF
-                </h4>
+            <article className="overflow-hidden rounded-xl border border-gray-200 border-t-4 border-t-verde-bosque bg-white shadow-sm transition hover:shadow-md">
+              <FotoLegal
+                src="/legal/estatutos.png"
+                alt="Firma de documentación institucional junto al informe de cumplimiento SPLAFT"
+              />
+              <div className="p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-full bg-tierra-amazonica/10 text-tierra-amazonica">
+                    <ScaleIcon />
+                  </span>
+                  <h4 className="text-lg font-bold text-azul-confianza">
+                    Estatutos &amp; UIF
+                  </h4>
+                </div>
+                <p className="mb-3 text-justify text-xs leading-snug text-gray-600">
+                  Objeto social estrictamente orientado a ciencia, asistencia y
+                  educación. Contamos con Oficial de Cumplimiento SPLAFT.
+                </p>
+                <div className="mb-4 flex flex-wrap gap-2">
+                  <span className="rounded border border-gray-300 bg-gray-100 px-2 py-1 text-[10px] font-bold text-gray-700">
+                    Cero Lavado de Activos
+                  </span>
+                  <span className="rounded border border-gray-300 bg-gray-100 px-2 py-1 text-[10px] font-bold text-gray-700">
+                    Transparencia UIF / APCI
+                  </span>
+                </div>
+                <DocumentoLink href="/documentos/escritura-publica.pdf">
+                  Ver Escritura Pública
+                </DocumentoLink>
               </div>
-              <p className="mb-3 text-justify text-xs leading-snug text-gray-600">
-                Objeto social estrictamente orientado a ciencia, asistencia y
-                educación. Contamos con Oficial de Cumplimiento SPLAFT.
-              </p>
-              <div className="mb-4 flex flex-wrap gap-2">
-                <span className="rounded border border-gray-300 bg-gray-100 px-2 py-1 text-[10px] font-bold text-gray-700">
-                  Cero Lavado de Activos
-                </span>
-                <span className="rounded border border-gray-300 bg-gray-100 px-2 py-1 text-[10px] font-bold text-gray-700">
-                  Transparencia UIF / APCI
-                </span>
-              </div>
-              <DocumentoLink href="/documentos/escritura-publica.pdf">
-                Ver Escritura Pública
-              </DocumentoLink>
             </article>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function FotoLegal({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative h-44 w-full">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(min-width: 768px) 33vw, 100vw"
+        className="object-cover object-center"
+      />
+    </div>
   );
 }
 

@@ -30,13 +30,13 @@ export function Alianzas() {
 
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
           <article className="flex flex-col justify-between overflow-hidden rounded-2xl border-t-8 border-verde-hoja bg-azul-confianza text-white shadow-xl transition duration-300 hover:-translate-y-1">
-            <div className="relative h-48 w-full">
+            <div className="relative h-56 w-full">
               <Image
-                src="/alianzas/rsc-empresarial.png"
+                src="/alianzas/esg-empresas.png"
                 alt="Reunión de trabajo entre una empresa aliada y RaícesCare revisando su tablero de impacto ESG"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover object-right"
+                className="object-cover object-center"
               />
             </div>
             <div className="flex flex-1 flex-col justify-between p-10">
@@ -69,13 +69,13 @@ export function Alianzas() {
           </article>
 
           <article className="flex flex-col justify-between overflow-hidden rounded-2xl border-t-8 border-verde-bosque bg-tierra-amazonica text-white shadow-xl transition duration-300 hover:-translate-y-1">
-            <div className="relative h-48 w-full">
+            <div className="relative h-56 w-full">
               <Image
-                src="/alianzas/iniciativas-emergentes.png"
+                src="/alianzas/incubacion.png"
                 alt="Emprendedores socioambientales acompañados por el equipo de RaícesCare"
                 fill
                 sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover object-right"
+                className="object-cover object-center"
               />
             </div>
             <div className="flex flex-1 flex-col justify-between p-10">

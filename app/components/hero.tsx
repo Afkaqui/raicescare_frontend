@@ -24,7 +24,7 @@ export function Hero() {
           className="object-cover object-center"
         />
         <div
-          className="absolute inset-0 bg-linear-to-b from-verde-bosque/85 to-verde-bosque/90"
+          className="absolute inset-0 bg-linear-to-b from-verde-bosque/45 via-verde-bosque/50 to-verde-bosque/65"
           aria-hidden="true"
         />
 

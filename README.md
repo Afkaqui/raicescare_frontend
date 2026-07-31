@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RaícesCare ONGD — Web institucional
 
-## Getting Started
+Landing institucional de la Asociación RaícesCare (ONGD), construida con Next.js 16
+(App Router) y Tailwind CSS 4. Implementa la propuesta `ra_cescare_oficial v4.html`
+con los textos aprobados (`Textos de la Web RaícesCare`) y el multimedia de
+`DIRECCIONV3`.
 
-First, run the development server:
+## Desarrollo
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Otros comandos: `npm run build`, `npm start`, `npm run lint`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Estructura
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/layout.tsx` — fuentes oficiales (Montserrat + Source Sans 3), metadatos y `lang="es"`.
+- `app/globals.css` — paleta de marca como tokens de Tailwind (`verde-bosque`,
+  `verde-hoja`, `azul-confianza`, `tierra-amazonica`, `gris-niebla`, `gris-pizarra`).
+- `app/site-config.ts` — datos institucionales (correo, RUC, partida registral, menú)
+  y `contactHref()` para los enlaces de contacto con asunto.
+- `app/components/` — una sección por archivo: `hero`, `nosotros`, `programas`,
+  `alianzas`, `transparencia`, `donar`, `sumate`, más `site-header` y `site-footer`.
+  Solo `site-header` (menú móvil) y `donar` (selección de monto) son componentes cliente.
 
-## Learn More
+## Multimedia
 
-To learn more about Next.js, take a look at the following resources:
+Las piezas de `DIRECCIONV3` son banners con texto incrustado; en `public/` se guardan
+únicamente las fotografías recortadas de cada banner, para no duplicar los textos que
+ya están en HTML:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `public/programas/`, `public/alianzas/`, `public/donaciones/`, `public/sumate/`,
+  `public/legal/`, `public/equipo/`.
+- `public/documentos/` — PDFs públicos enlazados desde Transparencia (certificado
+  literal SUNARP, ficha RUC, escritura pública).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pendientes de integración
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Los CTA de donación, el histórico de fondos y la memoria anual apuntan hoy al correo
+institucional: falta conectar la pasarela de pagos (Yape/Plin, tarjeta, PayPal) y el
+módulo de trazabilidad con el backend.

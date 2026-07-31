@@ -25,7 +25,7 @@ type PlanProps = {
 
 const planes: PlanProps[] = [
   {
-    imagen: "/donaciones/socio-recurrente.png",
+    imagen: "/donaciones/plan-mensual.png",
     alt: "Manos sosteniendo un brote de árbol en tierra fértil",
     Icon: RefreshIcon,
     iconColor: "text-verde-hoja",
@@ -42,7 +42,7 @@ const planes: PlanProps[] = [
     asunto: (monto) => `Quiero ser Socio Recurrente: S/ ${monto} mensuales`,
   },
   {
-    imagen: "/donaciones/donacion-unica.png",
+    imagen: "/donaciones/aporte-unico.png",
     alt: "Manos sosteniendo un brote de árbol sobre la selva amazónica",
     Icon: BoltIcon,
     iconColor: "text-tierra-amazonica",
@@ -67,13 +67,13 @@ function PlanDonacion(plan: PlanProps) {
     <div
       className={`overflow-hidden rounded-2xl border-t-8 bg-white text-center text-gray-800 shadow-2xl md:-translate-y-2 ${plan.bordeSuperior}`}
     >
-      <div className="relative h-40 w-full">
+      <div className="relative h-56 w-full">
         <Image
           src={plan.imagen}
           alt={plan.alt}
           fill
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover object-right"
+          className="object-cover object-center"
         />
       </div>
 
