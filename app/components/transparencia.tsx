@@ -27,10 +27,10 @@ export function Transparencia() {
 
         <div className="mb-16 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-lg">
           <Image
-            src="/transparencia-dashboard.png"
+            src="/dashboard-trazabilidad.png"
             alt="Módulo de Control y Trazabilidad Digital de RaícesCare: distribución de fondos 2026 (Programas 55%, Educación 20%, Ciencia 15%, Administración 10%), ejecución por trimestre con 91% acumulado al T4 sobre una meta anual de 92%, impacto directo con 1,200+ familias beneficiadas, 100% auditado UIF/APCI, 48 comunidades atendidas y 96% de trazabilidad verificada; trazabilidad por proyecto (registro, validación, ejecución, evidencia y reporte) e indicadores auditables"
             width={1672}
-            height={941}
+            height={833}
             sizes="(min-width: 1280px) 1280px, 100vw"
             className="h-auto w-full"
           />

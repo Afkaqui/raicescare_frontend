@@ -144,10 +144,16 @@ export function Nosotros() {
             </h2>
           </div>
           <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {valores.map((valor) => (
+            {valores.map((valor, indice) => (
               <li
                 key={valor.titulo}
-                className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm"
+                className={`overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm ${
+                  // Con un número impar de valores, el último se centra ocupando
+                  // las dos columnas pero conservando el ancho de una.
+                  indice === valores.length - 1 && valores.length % 2 === 1
+                    ? "lg:col-span-2 lg:mx-auto lg:w-[calc(50%-0.75rem)]"
+                    : ""
+                }`}
               >
                 <Image
                   src={valor.imagen}
