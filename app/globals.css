@@ -1,26 +1,34 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Paleta y tipografías oficiales del Manual de Marca RaícesCare */
+@theme {
+  --color-verde-bosque: #03391a;
+  --color-verde-hoja: #458823;
+  --color-azul-confianza: #02254a;
+  --color-tierra-amazonica: #665230;
+  --color-gris-niebla: #e3e9e9;
+  --color-gris-pizarra: #576d76;
+
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-montserrat: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-gris-niebla);
+  color: var(--color-gris-pizarra);
+}
+
+/* Compensa la cabecera fija al navegar por anclas */
+section[id] {
+  scroll-margin-top: 5.5rem;
 }
