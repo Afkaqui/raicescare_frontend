@@ -96,7 +96,7 @@ export function Nosotros() {
           <Carrusel
             diapositivas={galeriaComunidad}
             etiqueta="Quiénes somos: nuestro trabajo con las comunidades amazónicas"
-            proporcion="aspect-4/3"
+            proporcion="aspect-16/9"
           />
         </div>
 

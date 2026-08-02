@@ -4,13 +4,9 @@ import { contactHref } from "../site-config";
 type Programa = {
   titulo: string;
   /** Pieza institucional con el texto auditado incorporado. */
-  pieza?: string;
-  /** Fotografía sin texto: el contenido se rotula en HTML. */
-  foto?: string;
+  pieza: string;
   alt: string;
-  desafio: string;
-  intervencion: string;
-  acento: string;
+  acento: keyof typeof acentos;
   cta: { label: string; href: string; primario?: boolean }[];
 };
 
@@ -19,10 +15,6 @@ const programas: Programa[] = [
     titulo: "Raíces de Salud y Cuidado",
     pieza: "/programas/pieza-salud.png",
     alt: "Raíces de Salud y Cuidado. Desafío: en distintos territorios persisten brechas de acceso a bienes esenciales, información preventiva y mecanismos de atención frente a situaciones de emergencia y vulnerabilidad. Nuestra intervención: promovemos campañas de ayuda humanitaria, gestión transparente de donaciones y articulación con entidades competentes para facilitar orientación y derivación cuando sea necesario",
-    desafio:
-      "En distintos territorios persisten brechas de acceso a bienes esenciales, información preventiva y mecanismos de atención frente a situaciones de emergencia y vulnerabilidad.",
-    intervencion:
-      "Promovemos campañas de ayuda humanitaria, gestión transparente de donaciones y articulación con entidades competentes para facilitar orientación y derivación cuando sea necesario.",
     acento: "verde-hoja",
     cta: [
       {
@@ -35,12 +27,8 @@ const programas: Programa[] = [
   },
   {
     titulo: "Semillas de Educación",
-    foto: "/programas/educacion.png",
-    alt: "Jóvenes amazónicos en un taller de herramientas digitales de RaícesCare",
-    desafio:
-      "Niños, jóvenes y adultos de diversos territorios amazónicos enfrentan brechas de acceso a herramientas digitales, formación técnica y oportunidades educativas pertinentes.",
-    intervencion:
-      "Diseñamos y articulamos actividades educativas no formales, alfabetización digital y formación práctica, incorporando contenidos culturales cuando sean desarrollados o validados con las comunidades participantes.",
+    pieza: "/programas/pieza-educacion.png",
+    alt: "Semillas de Educación. Desafío: niños, jóvenes y adultos de diversos territorios amazónicos enfrentan brechas de acceso a herramientas digitales, formación técnica y oportunidades educativas pertinentes. Nuestra intervención: diseñamos y articulamos actividades educativas no formales, alfabetización digital y formación práctica, incorporando contenidos culturales cuando sean desarrollados o validados con las comunidades participantes",
     acento: "azul-confianza",
     cta: [
       {
@@ -55,10 +43,6 @@ const programas: Programa[] = [
     titulo: "Bio-Amazonía y Ecosistemas",
     pieza: "/programas/pieza-bioamazonia.png",
     alt: "Bio-Amazonía y Ecosistemas. Desafío: la degradación de ecosistemas, la pérdida de biodiversidad y los efectos del cambio climático afectan los medios de vida y la resiliencia de los territorios amazónicos. Nuestra intervención: promovemos iniciativas de investigación aplicada, restauración, monitoreo ambiental e innovación productiva, desarrolladas con aliados técnicos y participación local",
-    desafio:
-      "La degradación de ecosistemas, la pérdida de biodiversidad y los efectos del cambio climático afectan los medios de vida y la resiliencia de los territorios amazónicos.",
-    intervencion:
-      "Promovemos iniciativas de investigación aplicada, restauración, monitoreo ambiental e innovación productiva, desarrolladas con aliados técnicos y participación local.",
     acento: "verde-bosque",
     cta: [
       {
@@ -73,10 +57,6 @@ const programas: Programa[] = [
     titulo: "Redes de Cooperación y Alianzas",
     pieza: "/programas/pieza-cooperacion.png",
     alt: "Redes de Cooperación y Alianzas. Desafío: muchas iniciativas territoriales necesitan fortalecer su formulación, gobernanza, evidencia y articulación para acceder a oportunidades de cooperación y financiamiento. Nuestra intervención: facilitamos procesos de articulación institucional, preparación de iniciativas, gestión de alianzas y acompañamiento técnico",
-    desafio:
-      "Muchas iniciativas territoriales necesitan fortalecer su formulación, gobernanza, evidencia y articulación para acceder a oportunidades de cooperación y financiamiento.",
-    intervencion:
-      "Facilitamos procesos de articulación institucional, preparación de iniciativas, gestión de alianzas y acompañamiento técnico, de acuerdo con nuestras capacidades y con los requisitos de cada convocatoria o cooperante.",
     acento: "tierra-amazonica",
     cta: [
       {
@@ -142,32 +122,17 @@ export function Programas() {
                 key={programa.titulo}
                 className={`flex flex-col overflow-hidden rounded-xl border-t-4 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl ${acento.borde}`}
               >
-                <Image
-                  src={programa.pieza ?? programa.foto!}
-                  alt={programa.alt}
-                  width={1672}
-                  height={941}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="h-auto w-full"
-                />
-
-                {programa.foto && (
-                  <div className="border-t border-gray-100 p-8 text-sm">
-                    <h3 className="mb-4 font-montserrat text-xl font-bold text-verde-bosque">
-                      {programa.titulo}
-                    </h3>
-                    <p className="mb-3">
-                      <strong className="text-azul-confianza">Desafío:</strong>{" "}
-                      {programa.desafio}
-                    </p>
-                    <p>
-                      <strong className="text-azul-confianza">
-                        Nuestra intervención:
-                      </strong>{" "}
-                      {programa.intervencion}
-                    </p>
-                  </div>
-                )}
+                {/* Marco uniforme 16:9: las piezas se muestran completas
+                    (object-contain) aunque una llegue en otra proporción. */}
+                <div className="relative aspect-16/9 w-full bg-white">
+                  <Image
+                    src={programa.pieza}
+                    alt={programa.alt}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-contain"
+                  />
+                </div>
 
                 <div className="mt-auto flex flex-col gap-3 border-t border-gray-100 p-6 sm:flex-row">
                   {programa.cta.map((cta) => (
