@@ -15,7 +15,7 @@ const sourceSans = Source_Sans_3({
   weight: ["400", "600", "700"],
 });
 
-const titulo = `${site.name} | Ciencia, Cuidado y Comunidad para la Amazonía`;
+const titulo = `${site.name} | Ciencia, cuidado y cooperación para la Amazonía y el Perú`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -29,17 +29,16 @@ export const metadata: Metadata = {
   category: "nonprofit",
   keywords: [
     "RaícesCare",
-    "ONGD Perú",
-    "ONG Amazonía",
+    "asociación civil sin fines de lucro Perú",
+    "organización Amazonía",
     "Ucayali",
     "Pucallpa",
-    "donaciones Perú",
-    "trazabilidad digital de donaciones",
-    "responsabilidad social corporativa",
-    "ESG Perú",
+    "aportes y donaciones Perú",
+    "trazabilidad de fondos",
+    "sostenibilidad empresarial",
     "voluntariado Amazonía",
-    "cooperación técnica internacional",
-    "reforestación",
+    "cooperación institucional",
+    "investigación aplicada",
   ],
   authors: [{ name: site.legalName, url: siteUrl }],
   creator: site.legalName,

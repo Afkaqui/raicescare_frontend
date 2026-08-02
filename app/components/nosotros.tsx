@@ -1,83 +1,64 @@
 import Image from "next/image";
+import { equipo } from "../site-config";
 import { Carrusel, type Diapositiva } from "./carrusel";
+import { ArrowRightIcon } from "./icons";
 
 const galeriaComunidad: Diapositiva[] = [
   {
     src: "/nosotros/pieza-1.png",
-    alt: "Quiénes Somos: una organización dedicada a la asistencia social, educación, cultura e investigación científica, promoviendo el desarrollo humano y la sostenibilidad en el país, especialmente en personas en condición de pobreza o pobreza extrema y en la Amazonía. Ámbitos: asistencia social y ayuda humanitaria; educación, capacitación y cultura; investigación científica e ingeniería verde; alianzas y cooperación internacional",
+    alt: "Quiénes somos: RaícesCare es una asociación civil sin fines de lucro constituida en el Perú, con actividades de asistencia social, educación, cultura, investigación científica y cooperación",
   },
   {
     src: "/nosotros/pieza-2.png",
-    alt: "Quiénes Somos: una organización dedicada a la asistencia social, educación, cultura e investigación científica, junto a una familia amazónica que revisa material informativo de RaícesCare",
+    alt: "Quiénes somos: trabajamos con profesionales y aliados de distintas disciplinas junto a comunidades amazónicas",
   },
   {
     src: "/nosotros/pieza-3.png",
-    alt: "Quiénes Somos: una organización dedicada a la asistencia social, educación, cultura e investigación científica, junto a una voluntaria de RaícesCare que entrega un plantón a dos niños de la comunidad",
+    alt: "Quiénes somos: iniciativas destinadas principalmente a comunidades y territorios amazónicos",
   },
 ];
 
 const misionVision = [
   {
     src: "/nosotros/mision.png",
-    alt: "Nuestra Misión: promover el desarrollo humano, la educación y la sostenibilidad en el Perú, mediante la asistencia social directa, la educación técnica y la investigación científica aplicada",
+    alt: "Nuestra misión: contribuir al desarrollo humano y al cuidado de los territorios amazónicos mediante iniciativas de asistencia social, educación, investigación aplicada y cooperación desarrolladas con responsabilidad, participación comunitaria y evidencia verificable",
   },
   {
     src: "/nosotros/vision.png",
-    alt: "Nuestra Visión: ser la ONGD líder y referente en Latinoamérica por integrar tecnología de trazabilidad digital, preservación cultural originaria y modelos de desarrollo comunitario sostenibles e inalterables",
+    alt: "Nuestra visión: ser una organización amazónica reconocida por integrar cooperación, conocimiento científico, tecnología y participación comunitaria en iniciativas sociales y ambientales transparentes, sostenibles y replicables",
   },
 ];
 
 const valores = [
   {
-    imagen: "/valores/transparencia-radical.png",
-    titulo: "Transparencia Radical",
+    imagen: "/valores/transparencia-rendicion.png",
+    titulo: "Transparencia y rendición de cuentas",
     texto:
-      "Adheridos estrictamente a normativas UIF, SUNAT y APCI con cumplimiento de origen de fondos. Cumplimiento normativo, trazabilidad de fondos 100% verificable, reportes auditables y públicos, y compromiso con la ética y la rendición de cuentas.",
+      "Gestionamos la información institucional, financiera y operativa mediante controles internos, documentación de respaldo y mecanismos progresivos de trazabilidad, de acuerdo con las obligaciones que resulten aplicables.",
   },
   {
-    imagen: "/valores/empatia-comunitaria.png",
-    titulo: "Empatía Comunitaria",
+    imagen: "/valores/respeto-participacion.png",
+    titulo: "Respeto y participación comunitaria",
     texto:
-      "Respeto profundo por las comunidades nativas y sus saberes ancestrales.",
+      "Reconocemos la autonomía, los conocimientos y las prioridades de las comunidades, promoviendo su participación informada en las iniciativas que las involucran.",
   },
   {
-    imagen: "/valores/sostenibilidad-cientifica.png",
-    titulo: "Sostenibilidad Científica",
+    imagen: "/valores/decisiones-evidencia.png",
+    titulo: "Decisiones basadas en evidencia",
     texto:
-      "Soluciones de ingeniería verde basadas en datos e investigación real.",
+      "Diseñamos y evaluamos nuestras intervenciones utilizando información técnica, conocimiento local, indicadores verificables y metodologías adecuadas a cada territorio.",
   },
   {
-    imagen: "/valores/trabajo-en-red.png",
-    titulo: "Trabajo en Red",
+    imagen: "/valores/colaboracion-red.png",
+    titulo: "Colaboración y trabajo en red",
     texto:
-      "Co-creación con la cooperación técnica internacional y el sector privado.",
+      "Promovemos alianzas responsables entre comunidades, instituciones públicas, academia, organizaciones sociales, cooperantes y empresas.",
   },
   {
-    imagen: "/valores/innovacion-social.png",
-    titulo: "Innovación Social",
+    imagen: "/valores/innovacion-proposito.png",
+    titulo: "Innovación con propósito",
     texto:
-      "Herramientas de bio-inteligencia al servicio del bienestar humano.",
-  },
-];
-
-const equipo = [
-  {
-    foto: "/equipo/eduardo-noriega.png",
-    nombre: "Eduardo José Noriega Campos",
-    cargo: "Director Ejecutivo | Ingeniero Industrial",
-    enfoque: "Gestión de operaciones, bio-inteligencia e impacto tecnológico.",
-  },
-  {
-    foto: "/equipo/wyliam-lucar.png",
-    nombre: "Wyliam Lúcar Aliaga",
-    cargo: "Director Adjunto | Abogado",
-    enfoque: "Cumplimiento legal, alianzas institucionales y convenios.",
-  },
-  {
-    foto: "/equipo/rosa-galvez.png",
-    nombre: "Rosa Amelia Gálvez Rojas de Pilón",
-    cargo: "Directora de Finanzas | Abogada y Contador Mercantil",
-    enfoque: "Control de fondos, auditoría de la DAF e inmunidad financiera.",
+      "Aplicamos herramientas tecnológicas, metodologías participativas y conocimiento interdisciplinario para mejorar la gestión, el aprendizaje y la toma de decisiones.",
   },
 ];
 
@@ -96,18 +77,18 @@ export function Nosotros() {
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto mb-12 max-w-3xl text-center">
           <h2 className="mb-6 inline-block border-b-2 border-verde-hoja pb-2 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
-            Quiénes Somos
+            Quiénes somos
           </h2>
           <p className="text-lg leading-relaxed text-gray-700">
-            Una organización que tiene como objeto dedicarse a fines de
-            asistencia social, educación, cultura e investigación científica,
-            promoviendo el desarrollo humano y la sostenibilidad en el país, en
-            especial de personas en condición de pobreza o pobreza extrema y en
-            la Amazonía.
+            RaícesCare es una asociación civil sin fines de lucro constituida en
+            el Perú. Nuestro objeto institucional comprende actividades de
+            asistencia social, educación, cultura, investigación científica y
+            cooperación orientadas al desarrollo humano y la sostenibilidad.
           </p>
           <p className="mt-4 leading-relaxed text-gray-700">
-            Un equipo multidisciplinario de ingenieros, abogados y científicos
-            comprometidos con la dignidad humana y la Amazonía.
+            Trabajamos con profesionales y aliados de distintas disciplinas para
+            diseñar, articular y ejecutar iniciativas destinadas principalmente
+            a comunidades y territorios amazónicos.
           </p>
         </div>
 
@@ -140,7 +121,7 @@ export function Nosotros() {
         <div className="mb-20">
           <div className="mb-10 text-center">
             <h2 className="inline-block border-b-2 border-verde-hoja pb-2 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
-              Valores Institucionales
+              Nuestros valores
             </h2>
           </div>
           <ul className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -170,7 +151,7 @@ export function Nosotros() {
 
         <div className="mb-12 text-center">
           <h2 className="inline-block border-b-2 border-verde-hoja pb-2 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
-            El equipo detrás de la ciencia
+            Equipo institucional
           </h2>
         </div>
 
@@ -178,20 +159,60 @@ export function Nosotros() {
           {equipo.map((persona) => (
             <li
               key={persona.nombre}
-              className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
+              className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
             >
-              <Image
-                src={persona.foto}
-                alt={`${persona.nombre}, ${persona.cargo}. ${persona.enfoque}`}
-                width={1448}
-                height={1086}
-                sizes="(min-width: 1024px) 33vw, 100vw"
-                className="h-auto w-full"
-              />
+              {persona.linkedin ? (
+                <a
+                  href={persona.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Perfil profesional de ${persona.nombre} en LinkedIn`}
+                  className="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-verde-hoja"
+                >
+                  <TarjetaEquipo persona={persona} />
+                </a>
+              ) : (
+                <TarjetaEquipo persona={persona} />
+              )}
+
+              <div className="mt-auto border-t border-gray-100 p-4">
+                {persona.linkedin ? (
+                  <a
+                    href={persona.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 rounded-lg border border-azul-confianza px-4 py-2.5 text-sm font-bold text-azul-confianza transition hover:bg-azul-confianza hover:text-white"
+                  >
+                    Ver perfil profesional
+                    <ArrowRightIcon className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <p className="text-center text-sm text-gray-500">
+                    Perfil profesional disponible próximamente
+                  </p>
+                )}
+              </div>
             </li>
           ))}
         </ul>
       </div>
     </section>
+  );
+}
+
+function TarjetaEquipo({
+  persona,
+}: {
+  persona: (typeof equipo)[number];
+}) {
+  return (
+    <Image
+      src={persona.foto}
+      alt={`${persona.nombre}, ${persona.cargo}. ${persona.enfoque}`}
+      width={1448}
+      height={1086}
+      sizes="(min-width: 1024px) 33vw, 100vw"
+      className="h-auto w-full"
+    />
   );
 }

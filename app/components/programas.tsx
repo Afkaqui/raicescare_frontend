@@ -1,140 +1,118 @@
 import Image from "next/image";
 import { contactHref } from "../site-config";
-import { BookIcon, GlobeIcon, LinkIcon, PlusIcon } from "./icons";
 
 type Programa = {
   titulo: string;
-  imagen: string;
+  /** Pieza institucional con el texto auditado incorporado. */
+  pieza?: string;
+  /** Fotografía sin texto: el contenido se rotula en HTML. */
+  foto?: string;
   alt: string;
-  Icon: typeof PlusIcon;
+  desafio: string;
+  intervencion: string;
   acento: string;
-  problematica: string;
-  solucion: string;
-  cta: { label: string; href: string; estilo: string }[];
+  cta: { label: string; href: string; primario?: boolean }[];
 };
 
 const programas: Programa[] = [
   {
-    titulo: "1. Raíces de Salud & Cuidado",
-    imagen: "/programas/salud-cuidado.png",
-    alt: "Personal de RaícesCare entregando un kit de auxilio a una familia amazónica",
-    Icon: PlusIcon,
+    titulo: "Raíces de Salud y Cuidado",
+    pieza: "/programas/pieza-salud.png",
+    alt: "Raíces de Salud y Cuidado. Desafío: en distintos territorios persisten brechas de acceso a bienes esenciales, información preventiva y mecanismos de atención frente a situaciones de emergencia y vulnerabilidad. Nuestra intervención: promovemos campañas de ayuda humanitaria, gestión transparente de donaciones y articulación con entidades competentes para facilitar orientación y derivación cuando sea necesario",
+    desafio:
+      "En distintos territorios persisten brechas de acceso a bienes esenciales, información preventiva y mecanismos de atención frente a situaciones de emergencia y vulnerabilidad.",
+    intervencion:
+      "Promovemos campañas de ayuda humanitaria, gestión transparente de donaciones y articulación con entidades competentes para facilitar orientación y derivación cuando sea necesario.",
     acento: "verde-hoja",
-    problematica:
-      "Vulnerabilidad extrema, desnutrición infantil, falta de kits de emergencia y violencia de género e intrafamiliar en comunidades aisladas.",
-    solucion:
-      "Redes de auxilio humanitario directo, canalización de donaciones transparentes y acompañamiento integral a víctimas de violencia.",
     cta: [
       {
-        label: "Donar Kits",
-        href: "#donar",
-        estilo:
-          "bg-verde-hoja text-white hover:bg-verde-bosque",
+        label: "Conocer campañas activas",
+        href: contactHref("Consulta por campañas activas de ayuda humanitaria"),
+        primario: true,
       },
-      {
-        label: "Voluntariado",
-        href: "#sumate",
-        estilo:
-          "border border-verde-hoja text-verde-hoja hover:bg-gray-50",
-      },
+      { label: "Participar como voluntario", href: "#sumate" },
     ],
   },
   {
-    titulo: "2. Semillas de Educación",
-    imagen: "/programas/educacion.png",
-    alt: "Jóvenes amazónicos en un taller de herramientas digitales",
-    Icon: BookIcon,
+    titulo: "Semillas de Educación",
+    foto: "/programas/educacion.png",
+    alt: "Jóvenes amazónicos en un taller de herramientas digitales de RaícesCare",
+    desafio:
+      "Niños, jóvenes y adultos de diversos territorios amazónicos enfrentan brechas de acceso a herramientas digitales, formación técnica y oportunidades educativas pertinentes.",
+    intervencion:
+      "Diseñamos y articulamos actividades educativas no formales, alfabetización digital y formación práctica, incorporando contenidos culturales cuando sean desarrollados o validados con las comunidades participantes.",
     acento: "azul-confianza",
-    problematica:
-      "Brecha digital, pérdida de lenguas originarias y falta de oportunidades técnicas laborales en jóvenes amazónicos.",
-    solucion:
-      "Talleres no formales gratuitos de herramientas digitales, capacitación en oficios técnicos y rescate del patrimonio cultural y lingüístico de la selva.",
     cta: [
       {
-        label: "Financiar Beca",
-        href: "#donar",
-        estilo: "bg-azul-confianza text-white hover:bg-azul-confianza/90",
+        label: "Conocer iniciativas educativas",
+        href: contactHref("Consulta por iniciativas educativas"),
+        primario: true,
       },
-      {
-        label: "Ser Mentor",
-        href: "#sumate",
-        estilo:
-          "border border-azul-confianza text-azul-confianza hover:bg-gray-50",
-      },
+      { label: "Participar como mentor", href: "#sumate" },
     ],
   },
   {
-    titulo: "3. Bio-Amazonía & Ecosistemas",
-    imagen: "/programas/bio-amazonia.png",
-    alt: "Equipo científico tomando muestras de suelo en la cuenca del Ucayali",
-    Icon: GlobeIcon,
+    titulo: "Bio-Amazonía y Ecosistemas",
+    pieza: "/programas/pieza-bioamazonia.png",
+    alt: "Bio-Amazonía y Ecosistemas. Desafío: la degradación de ecosistemas, la pérdida de biodiversidad y los efectos del cambio climático afectan los medios de vida y la resiliencia de los territorios amazónicos. Nuestra intervención: promovemos iniciativas de investigación aplicada, restauración, monitoreo ambiental e innovación productiva, desarrolladas con aliados técnicos y participación local",
+    desafio:
+      "La degradación de ecosistemas, la pérdida de biodiversidad y los efectos del cambio climático afectan los medios de vida y la resiliencia de los territorios amazónicos.",
+    intervencion:
+      "Promovemos iniciativas de investigación aplicada, restauración, monitoreo ambiental e innovación productiva, desarrolladas con aliados técnicos y participación local.",
     acento: "verde-bosque",
-    problematica:
-      "Deforestación, degradación de suelos en la cuenca del Ucayali y cambio climático.",
-    solucion:
-      "Explicamos el crecimiento verde con evidencia, a través de estudios biotecnológicos de regeneración, herramientas de bio-inteligencia e ingeniería verde transferidas de forma gratuita a agricultores locales.",
     cta: [
       {
-        label: "Patrocinar Hectárea",
-        href: "#donar",
-        estilo: "bg-verde-bosque text-white hover:bg-verde-bosque/90",
+        label: "Conocer proyectos ambientales",
+        href: contactHref("Consulta por proyectos ambientales"),
+        primario: true,
       },
-      {
-        label: "Alianza B2B",
-        href: "#alianzas",
-        estilo:
-          "border border-verde-bosque text-verde-bosque hover:bg-gray-50",
-      },
+      { label: "Proponer una alianza técnica", href: "#alianzas" },
     ],
   },
   {
-    titulo: "4. Redes de Cooperación Global",
-    imagen: "/programas/cooperacion-global.png",
-    alt: "Equipo de RaícesCare articulando proyectos con cooperantes",
-    Icon: LinkIcon,
+    titulo: "Redes de Cooperación y Alianzas",
+    pieza: "/programas/pieza-cooperacion.png",
+    alt: "Redes de Cooperación y Alianzas. Desafío: muchas iniciativas territoriales necesitan fortalecer su formulación, gobernanza, evidencia y articulación para acceder a oportunidades de cooperación y financiamiento. Nuestra intervención: facilitamos procesos de articulación institucional, preparación de iniciativas, gestión de alianzas y acompañamiento técnico",
+    desafio:
+      "Muchas iniciativas territoriales necesitan fortalecer su formulación, gobernanza, evidencia y articulación para acceder a oportunidades de cooperación y financiamiento.",
+    intervencion:
+      "Facilitamos procesos de articulación institucional, preparación de iniciativas, gestión de alianzas y acompañamiento técnico, de acuerdo con nuestras capacidades y con los requisitos de cada convocatoria o cooperante.",
     acento: "tierra-amazonica",
-    problematica:
-      "Escasez de proyectos andino-amazónicos listos para financiamiento y brechas de articulación con fondos climáticos.",
-    solucion:
-      "Gestión de Cooperación Técnica Internacional (CTI), celebración de convenios y estructuración de proyectos socioambientales auditables para donantes corporativos.",
     cta: [
       {
-        label: "Postula tu Proyecto",
-        href: "#alianzas",
-        estilo: "bg-tierra-amazonica text-white hover:bg-tierra-amazonica/90",
+        label: "Evaluar mi iniciativa",
+        href: contactHref("Evaluación de iniciativa para cooperación"),
+        primario: true,
       },
-      {
-        label: "Convenio B2B",
-        href: contactHref("Convenio B2B con RaícesCare ONGD"),
-        estilo:
-          "border border-tierra-amazonica text-tierra-amazonica hover:bg-gray-50",
-      },
+      { label: "Proponer una alianza", href: "#alianzas" },
     ],
   },
 ];
 
 /** Clases de acento por programa (escritas completas para que Tailwind las detecte). */
-const acentos: Record<string, { borde: string; fondo: string; texto: string }> =
+const acentos: Record<string, { borde: string; boton: string; enlace: string }> =
   {
     "verde-hoja": {
       borde: "border-verde-hoja",
-      fondo: "bg-verde-hoja/10",
-      texto: "text-verde-hoja",
+      boton: "bg-verde-hoja text-white hover:bg-verde-bosque",
+      enlace: "border-verde-hoja text-verde-hoja hover:bg-verde-hoja/10",
     },
     "azul-confianza": {
       borde: "border-azul-confianza",
-      fondo: "bg-azul-confianza/10",
-      texto: "text-azul-confianza",
+      boton: "bg-azul-confianza text-white hover:bg-azul-confianza/90",
+      enlace:
+        "border-azul-confianza text-azul-confianza hover:bg-azul-confianza/10",
     },
     "verde-bosque": {
       borde: "border-verde-bosque",
-      fondo: "bg-verde-bosque/10",
-      texto: "text-verde-bosque",
+      boton: "bg-verde-bosque text-white hover:bg-verde-bosque/90",
+      enlace: "border-verde-bosque text-verde-bosque hover:bg-verde-bosque/10",
     },
     "tierra-amazonica": {
       borde: "border-tierra-amazonica",
-      fondo: "bg-tierra-amazonica/10",
-      texto: "text-tierra-amazonica",
+      boton: "bg-tierra-amazonica text-white hover:bg-tierra-amazonica/90",
+      enlace:
+        "border-tierra-amazonica text-tierra-amazonica hover:bg-tierra-amazonica/10",
     },
   };
 
@@ -147,15 +125,16 @@ export function Programas() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 text-center">
           <h2 className="mb-4 font-montserrat text-3xl font-bold text-verde-bosque md:text-4xl">
-            Nuestras Líneas de Acción
+            Nuestras líneas de acción
           </h2>
-          <p className="mx-auto max-w-2xl text-lg">
-            Intervenimos con precisión donde la ayuda es más necesaria,
-            basándonos en ciencia y empatía comunitaria.
+          <p className="mx-auto max-w-3xl text-lg">
+            Organizamos nuestro trabajo en cuatro ámbitos complementarios,
+            sujetos a la disponibilidad de recursos, alianzas, capacidades
+            técnicas y evaluación de cada intervención.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {programas.map((programa) => {
             const acento = acentos[programa.acento];
             return (
@@ -164,48 +143,44 @@ export function Programas() {
                 className={`flex flex-col overflow-hidden rounded-xl border-t-4 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl ${acento.borde}`}
               >
                 <Image
-                  src={programa.imagen}
+                  src={programa.pieza ?? programa.foto!}
                   alt={programa.alt}
                   width={1672}
                   height={941}
-                  sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className="h-auto w-full"
                 />
 
-                <div className="flex flex-1 flex-col p-8">
-                  <span
-                    className={`mb-4 flex h-12 w-12 items-center justify-center rounded-lg ${acento.fondo} ${acento.texto}`}
-                  >
-                    <programa.Icon />
-                  </span>
-                  <h3 className="mb-4 font-montserrat text-xl font-bold text-azul-confianza">
-                    {programa.titulo}
-                  </h3>
-                  <div className="flex-1 text-sm">
+                {programa.foto && (
+                  <div className="border-t border-gray-100 p-8 text-sm">
+                    <h3 className="mb-4 font-montserrat text-xl font-bold text-verde-bosque">
+                      {programa.titulo}
+                    </h3>
                     <p className="mb-3">
-                      <strong className="text-verde-bosque">
-                        La problemática:
-                      </strong>{" "}
-                      {programa.problematica}
+                      <strong className="text-azul-confianza">Desafío:</strong>{" "}
+                      {programa.desafio}
                     </p>
-                    <p className="mb-6">
-                      <strong className="text-verde-bosque">
-                        La Solución: RaícesCare:
+                    <p>
+                      <strong className="text-azul-confianza">
+                        Nuestra intervención:
                       </strong>{" "}
-                      {programa.solucion}
+                      {programa.intervencion}
                     </p>
                   </div>
-                  <div className="mt-auto flex flex-col gap-2">
-                    {programa.cta.map((cta) => (
-                      <a
-                        key={cta.label}
-                        href={cta.href}
-                        className={`w-full rounded py-2 text-center font-semibold transition-colors ${cta.estilo}`}
-                      >
-                        {cta.label}
-                      </a>
-                    ))}
-                  </div>
+                )}
+
+                <div className="mt-auto flex flex-col gap-3 border-t border-gray-100 p-6 sm:flex-row">
+                  {programa.cta.map((cta) => (
+                    <a
+                      key={cta.label}
+                      href={cta.href}
+                      className={`flex-1 rounded-lg px-5 py-3 text-center text-sm font-semibold transition-colors ${
+                        cta.primario ? acento.boton : `border ${acento.enlace}`
+                      }`}
+                    >
+                      {cta.label}
+                    </a>
+                  ))}
                 </div>
               </article>
             );

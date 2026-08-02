@@ -14,7 +14,7 @@ export function SiteHeader() {
         <a
           href="#inicio"
           className="flex items-center gap-3"
-          aria-label="RaícesCare ONGD, ir al inicio"
+          aria-label="RaícesCare, ir al inicio"
           onClick={() => setOpen(false)}
         >
           <Image
@@ -53,7 +53,7 @@ export function SiteHeader() {
                 href="#donar"
                 className="inline-flex items-center gap-2 rounded-lg bg-verde-hoja px-5 py-2.5 text-white shadow-md transition-colors hover:bg-verde-bosque"
               >
-                <HeartIcon /> DONA AQUÍ
+                <HeartIcon /> DONAR AHORA
               </a>
             </li>
           </ul>
@@ -95,7 +95,7 @@ export function SiteHeader() {
                 className="flex items-center justify-center gap-2 py-3 text-verde-hoja"
                 onClick={() => setOpen(false)}
               >
-                <HeartIcon /> DONA AQUÍ
+                <HeartIcon /> DONAR AHORA
               </a>
             </li>
           </ul>

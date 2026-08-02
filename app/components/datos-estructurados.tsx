@@ -1,8 +1,8 @@
-import { site, siteUrl } from "../site-config";
+import { equipo, site, siteUrl } from "../site-config";
 
 /**
- * JSON-LD (schema.org) para que los buscadores reconozcan a la ONGD, sus datos
- * registrales y sus canales oficiales en resultados enriquecidos.
+ * JSON-LD (schema.org) para que los buscadores reconozcan a la organización,
+ * sus datos registrales y sus canales oficiales en resultados enriquecidos.
  */
 export function DatosEstructurados() {
   const datos = {
@@ -12,7 +12,7 @@ export function DatosEstructurados() {
         "@type": "NGO",
         "@id": `${siteUrl}/#organizacion`,
         name: site.name,
-        alternateName: "RaícesCare",
+        alternateName: site.legalName,
         legalName: site.legalName,
         description: site.description,
         slogan: site.claim,
@@ -28,8 +28,8 @@ export function DatosEstructurados() {
         knowsAbout: [
           "Asistencia social y ayuda humanitaria",
           "Educación, capacitación y cultura",
-          "Investigación científica e ingeniería verde",
-          "Cooperación técnica internacional",
+          "Investigación científica aplicada",
+          "Cooperación y articulación institucional",
         ],
         address: [
           {
@@ -56,6 +56,14 @@ export function DatosEstructurados() {
           availableLanguage: ["Spanish"],
         },
         sameAs: [site.linkedin],
+        employee: equipo.map((persona) => ({
+          "@type": "Person",
+          name: persona.nombre,
+          jobTitle: persona.cargo.split("|")[0].trim(),
+          description: persona.enfoque,
+          image: `${siteUrl}${persona.foto}`,
+          ...(persona.linkedin ? { sameAs: [persona.linkedin] } : {}),
+        })),
       },
       {
         "@type": "WebSite",
