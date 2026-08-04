@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { UniversalCta } from "./cta/universal-cta";
+import type { FunctionalCtaCode } from "../lib/cta/registry";
 import { contactHref, site } from "../site-config";
 import { LockIcon, RefreshIcon, BoltIcon } from "./icons";
 
@@ -17,9 +19,7 @@ type PlanProps = {
   bordeSuperior: string;
   montoActivo: string;
   montoHover: string;
-  botonEstilo: string;
-  botonLabel: string;
-  asunto: (monto: number) => string;
+  code: FunctionalCtaCode;
 };
 
 const planes: PlanProps[] = [
@@ -36,9 +36,7 @@ const planes: PlanProps[] = [
     bordeSuperior: "border-verde-hoja",
     montoActivo: "bg-verde-hoja text-white",
     montoHover: "hover:bg-verde-hoja hover:text-white",
-    botonEstilo: "bg-verde-hoja hover:bg-verde-bosque",
-    botonLabel: "Realizar un aporte mensual",
-    asunto: (monto) => `Aporte mensual de S/ ${monto}`,
+    code: "START_RECURRING_CONTRIBUTION",
   },
   {
     imagen: "/donaciones/pieza-unica.png",
@@ -53,9 +51,7 @@ const planes: PlanProps[] = [
     bordeSuperior: "border-azul-confianza",
     montoActivo: "bg-azul-confianza text-white",
     montoHover: "hover:bg-azul-confianza hover:text-white",
-    botonEstilo: "bg-azul-confianza hover:bg-azul-confianza/90",
-    botonLabel: "Realizar un aporte",
-    asunto: (monto) => `Aporte único de S/ ${monto}`,
+    code: "START_SINGLE_CONTRIBUTION",
   },
 ];
 
@@ -110,12 +106,13 @@ function PlanAporte(plan: PlanProps) {
         </div>
       </fieldset>
 
-      <a
-        href={contactHref(plan.asunto(monto))}
-        className={`mt-auto block w-full rounded-xl py-4 text-lg font-bold text-white shadow-lg transition ${plan.botonEstilo}`}
-      >
-        {plan.botonLabel}
-      </a>
+      <UniversalCta
+        code={plan.code}
+        location="donaciones"
+        params={{ amount: String(monto), currency: "PEN" }}
+        className="mt-auto py-4 text-base"
+        fullWidth
+      />
       </div>
     </div>
   );

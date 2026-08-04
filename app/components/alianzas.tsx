@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { contactHref } from "../site-config";
+import { UniversalCta } from "./cta/universal-cta";
 
 export function Alianzas() {
   return (
@@ -34,12 +34,12 @@ export function Alianzas() {
                 normativa aplicable y de la condición registral vigente de
                 RaícesCare. Cada colaboración será evaluada individualmente.
               </p>
-              <a
-                href={contactHref("Solicito una reunión institucional")}
-                className="block rounded-lg bg-verde-hoja px-8 py-4 text-center font-bold text-white shadow-md transition hover:bg-verde-bosque"
-              >
-                Solicitar una reunión institucional
-              </a>
+              <UniversalCta
+                code="REQUEST_INSTITUTIONAL_MEETING"
+                location="empresas"
+                className="py-4 text-base"
+                fullWidth
+              />
             </div>
           </article>
 
@@ -59,12 +59,12 @@ export function Alianzas() {
                 legal, financiera y reputacional. RaícesCare no garantiza la
                 obtención de financiamiento ni la selección en convocatorias.
               </p>
-              <a
-                href={contactHref("Evaluación de elegibilidad de proyecto")}
-                className="block rounded-lg bg-tierra-amazonica px-8 py-4 text-center font-bold text-white shadow-md transition hover:bg-tierra-amazonica/90"
-              >
-                Evaluar elegibilidad del proyecto
-              </a>
+              <UniversalCta
+                contextual="EVALUAR_ELEGIBILIDAD"
+                location="empresas"
+                className="py-4 text-base"
+                fullWidth
+              />
             </div>
           </article>
         </div>

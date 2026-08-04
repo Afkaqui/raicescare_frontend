@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { navLinks } from "../site-config";
-import { CloseIcon, HeartIcon, MenuIcon } from "./icons";
+import { UniversalCta } from "./cta/universal-cta";
+import { CloseIcon, MenuIcon } from "./icons";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -11,8 +13,8 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="flex items-center justify-between px-6 py-3 md:px-12">
-        <a
-          href="#inicio"
+        <Link
+          href="/"
           className="flex items-center gap-3"
           aria-label="RaícesCare, ir al inicio"
           onClick={() => setOpen(false)}
@@ -34,27 +36,27 @@ export function SiteHeader() {
               CIENCIA, CUIDADO Y COMUNIDAD
             </span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden lg:block" aria-label="Navegación principal">
           <ul className="flex items-center gap-6 text-sm font-semibold text-azul-confianza">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="transition-colors hover:text-verde-hoja"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
             <li>
-              <a
-                href="#donar"
-                className="inline-flex items-center gap-2 rounded-lg bg-verde-hoja px-5 py-2.5 text-white shadow-md transition-colors hover:bg-verde-bosque"
-              >
-                <HeartIcon /> DONAR AHORA
-              </a>
+              <UniversalCta
+                code="DONATE_ENTRY"
+                location="header"
+                campaign="general"
+                className="px-5 py-2.5"
+              />
             </li>
           </ul>
         </nav>
@@ -67,7 +69,11 @@ export function SiteHeader() {
           aria-expanded={open}
           aria-controls="menu-movil"
         >
-          {open ? <CloseIcon className="h-8 w-8" /> : <MenuIcon className="h-8 w-8" />}
+          {open ? (
+            <CloseIcon className="h-8 w-8" />
+          ) : (
+            <MenuIcon className="h-8 w-8" />
+          )}
         </button>
       </div>
 
@@ -80,23 +86,22 @@ export function SiteHeader() {
           <ul className="flex flex-col py-4 text-center font-semibold text-azul-confianza">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="block py-3 hover:bg-gris-niebla"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
-            <li>
-              <a
-                href="#donar"
-                className="flex items-center justify-center gap-2 py-3 text-verde-hoja"
-                onClick={() => setOpen(false)}
-              >
-                <HeartIcon /> DONAR AHORA
-              </a>
+            <li className="px-6 pt-3">
+              <UniversalCta
+                code="DONATE_ENTRY"
+                location="header"
+                campaign="general"
+                fullWidth
+              />
             </li>
           </ul>
         </nav>

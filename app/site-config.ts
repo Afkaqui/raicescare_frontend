@@ -83,11 +83,12 @@ export const politicas = [
   "Canal de consultas e integridad",
 ] as const;
 
+/** Anclas absolutas: funcionan igual desde la portada y desde las rutas internas. */
 export const navLinks = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#nosotros", label: "Quiénes somos" },
-  { href: "#programas", label: "Programas" },
-  { href: "#alianzas", label: "Empresas y aliados" },
-  { href: "#transparencia", label: "Impacto y transparencia" },
-  { href: "#sumate", label: "Participa" },
+  { href: "/#inicio", label: "Inicio" },
+  { href: "/#nosotros", label: "Quiénes somos" },
+  { href: "/programas", label: "Programas" },
+  { href: "/#alianzas", label: "Empresas y aliados" },
+  { href: "/transparencia", label: "Impacto y transparencia" },
+  { href: "/participa", label: "Participa" },
 ] as const;

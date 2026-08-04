@@ -1,22 +1,17 @@
 import Image from "next/image";
-import { contactHref } from "../site-config";
-import {
-  ArrowRightIcon,
-  MegaphoneIcon,
-  ScaleIcon,
-  UserGroupIcon,
-} from "./icons";
+import { UniversalCta } from "./cta/universal-cta";
+import type { CtaContextualKey } from "../lib/cta/registry";
+import { MegaphoneIcon, ScaleIcon, UserGroupIcon } from "./icons";
 
 const bloques = [
   {
     imagen: "/sumate/pieza-voluntariado.png",
     alt: "Voluntariado de campo: voluntarios de RaícesCare conversando con una pobladora en una comunidad amazónica",
     Icon: UserGroupIcon,
+    contextual: "PARTICIPAR_VOLUNTARIO" as CtaContextualKey,
     titulo: "Voluntariado de campo",
     descripcion:
       "Participa en actividades de campo previamente planificadas, sujetas a convocatoria, perfil requerido, capacitación, protocolos de seguridad y disponibilidad del proyecto.",
-    cta: "Ver oportunidades de voluntariado",
-    asunto: "Consulta por oportunidades de voluntariado",
     borde: "border-verde-hoja",
     fondo: "bg-verde-hoja/10",
     texto: "text-verde-hoja",
@@ -26,11 +21,10 @@ const bloques = [
     imagen: "/sumate/pieza-pro-bono.png",
     alt: "Apoyo pro bono y pasantías: profesionales y estudiantes voluntarios trabajando en un proyecto de RaícesCare",
     Icon: ScaleIcon,
+    contextual: "OPORTUNIDADES_PRO_BONO" as CtaContextualKey,
     titulo: "Apoyo pro bono y pasantías",
     descripcion:
       "Convocatorias para profesionales y estudiantes que deseen aportar conocimientos especializados en tareas previamente definidas.",
-    cta: "Ver oportunidades pro bono",
-    asunto: "Consulta por oportunidades pro bono y pasantías",
     borde: "border-azul-confianza",
     fondo: "bg-azul-confianza/10",
     texto: "text-azul-confianza",
@@ -41,11 +35,10 @@ const bloques = [
     imagen: "/sumate/pieza-embajadores.png",
     alt: "Embajadores institucionales: voluntaria de RaícesCare grabando un mensaje para difundir las campañas",
     Icon: MegaphoneIcon,
+    contextual: "PROGRAMA_EMBAJADORES" as CtaContextualKey,
     titulo: "Embajadores institucionales",
     descripcion:
       "Ayuda a difundir responsablemente nuestras iniciativas y campañas, respetando los mensajes, imágenes, autorizaciones y lineamientos institucionales.",
-    cta: "Conocer el programa de embajadores",
-    asunto: "Consulta por el programa de embajadores",
     borde: "border-tierra-amazonica",
     fondo: "bg-tierra-amazonica/10",
     texto: "text-tierra-amazonica",
@@ -93,13 +86,13 @@ export function Sumate() {
                 <p className="mb-8 text-sm leading-relaxed text-gray-600">
                   {bloque.descripcion}
                 </p>
-                <a
-                  href={contactHref(bloque.asunto)}
-                  className={`mt-auto flex items-center justify-center gap-2 rounded-lg border px-5 py-3 text-sm font-bold transition ${bloque.boton}`}
-                >
-                  {bloque.cta}
-                  <ArrowRightIcon className="h-4 w-4" />
-                </a>
+                <UniversalCta
+                  contextual={bloque.contextual}
+                  location="participa"
+                  variant="secondary"
+                  className="mt-auto"
+                  fullWidth
+                />
               </div>
             </li>
           ))}

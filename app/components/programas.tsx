@@ -1,13 +1,21 @@
 import Image from "next/image";
-import { contactHref } from "../site-config";
+import { UniversalCta } from "./cta/universal-cta";
+import type {
+  CtaContextualKey,
+  FunctionalCtaCode,
+} from "../lib/cta/registry";
 
 type Programa = {
   titulo: string;
+  slug: string;
   /** Pieza institucional con el texto auditado incorporado. */
   pieza: string;
   alt: string;
   acento: keyof typeof acentos;
-  cta: { label: string; href: string; primario?: boolean }[];
+  cta: {
+    code?: FunctionalCtaCode;
+    contextual?: CtaContextualKey;
+  }[];
 };
 
 const programas: Programa[] = [
@@ -15,56 +23,44 @@ const programas: Programa[] = [
     titulo: "Raíces de Salud y Cuidado",
     pieza: "/programas/pieza-salud.png",
     alt: "Raíces de Salud y Cuidado. Desafío: en distintos territorios persisten brechas de acceso a bienes esenciales, información preventiva y mecanismos de atención frente a situaciones de emergencia y vulnerabilidad. Nuestra intervención: promovemos campañas de ayuda humanitaria, gestión transparente de donaciones y articulación con entidades competentes para facilitar orientación y derivación cuando sea necesario",
+    slug: "salud-y-cuidado",
     acento: "verde-hoja",
     cta: [
-      {
-        label: "Conocer campañas activas",
-        href: contactHref("Consulta por campañas activas de ayuda humanitaria"),
-        primario: true,
-      },
-      { label: "Participar como voluntario", href: "#sumate" },
+      { code: "VIEW_HEALTH_CAMPAIGNS" },
+      { contextual: "PARTICIPAR_VOLUNTARIO" },
     ],
   },
   {
     titulo: "Semillas de Educación",
     pieza: "/programas/pieza-educacion.png",
     alt: "Semillas de Educación. Desafío: niños, jóvenes y adultos de diversos territorios amazónicos enfrentan brechas de acceso a herramientas digitales, formación técnica y oportunidades educativas pertinentes. Nuestra intervención: diseñamos y articulamos actividades educativas no formales, alfabetización digital y formación práctica, incorporando contenidos culturales cuando sean desarrollados o validados con las comunidades participantes",
+    slug: "semillas-de-educacion",
     acento: "azul-confianza",
     cta: [
-      {
-        label: "Conocer iniciativas educativas",
-        href: contactHref("Consulta por iniciativas educativas"),
-        primario: true,
-      },
-      { label: "Participar como mentor", href: "#sumate" },
+      { code: "VIEW_EDUCATION_INITIATIVES" },
+      { contextual: "PARTICIPAR_MENTOR" },
     ],
   },
   {
     titulo: "Bio-Amazonía y Ecosistemas",
     pieza: "/programas/pieza-bioamazonia.png",
     alt: "Bio-Amazonía y Ecosistemas. Desafío: la degradación de ecosistemas, la pérdida de biodiversidad y los efectos del cambio climático afectan los medios de vida y la resiliencia de los territorios amazónicos. Nuestra intervención: promovemos iniciativas de investigación aplicada, restauración, monitoreo ambiental e innovación productiva, desarrolladas con aliados técnicos y participación local",
+    slug: "bio-amazonia",
     acento: "verde-bosque",
     cta: [
-      {
-        label: "Conocer proyectos ambientales",
-        href: contactHref("Consulta por proyectos ambientales"),
-        primario: true,
-      },
-      { label: "Proponer una alianza técnica", href: "#alianzas" },
+      { code: "VIEW_ENVIRONMENT_PROJECTS" },
+      { contextual: "PROPONER_ALIANZA_TECNICA" },
     ],
   },
   {
     titulo: "Redes de Cooperación y Alianzas",
     pieza: "/programas/pieza-cooperacion.png",
     alt: "Redes de Cooperación y Alianzas. Desafío: muchas iniciativas territoriales necesitan fortalecer su formulación, gobernanza, evidencia y articulación para acceder a oportunidades de cooperación y financiamiento. Nuestra intervención: facilitamos procesos de articulación institucional, preparación de iniciativas, gestión de alianzas y acompañamiento técnico",
+    slug: "cooperacion-y-alianzas",
     acento: "tierra-amazonica",
     cta: [
-      {
-        label: "Evaluar mi iniciativa",
-        href: contactHref("Evaluación de iniciativa para cooperación"),
-        primario: true,
-      },
-      { label: "Proponer una alianza", href: "#alianzas" },
+      { code: "EVALUATE_INITIATIVE" },
+      { code: "PROPOSE_ALLIANCE" },
     ],
   },
 ];
@@ -135,16 +131,17 @@ export function Programas() {
                 </div>
 
                 <div className="mt-auto flex flex-col gap-3 border-t border-gray-100 p-6 sm:flex-row">
-                  {programa.cta.map((cta) => (
-                    <a
-                      key={cta.label}
-                      href={cta.href}
-                      className={`flex-1 rounded-lg px-5 py-3 text-center text-sm font-semibold transition-colors ${
-                        cta.primario ? acento.boton : `border ${acento.enlace}`
-                      }`}
-                    >
-                      {cta.label}
-                    </a>
+                  {programa.cta.map((cta, indice) => (
+                    <UniversalCta
+                      key={`${programa.slug}-${indice}`}
+                      {...(cta.contextual
+                        ? { contextual: cta.contextual }
+                        : { code: cta.code! })}
+                      location="programas"
+                      params={{ program: programa.slug }}
+                      variant={indice === 0 ? "primary" : "secondary"}
+                      className="flex-1"
+                    />
                   ))}
                 </div>
               </article>

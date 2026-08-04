@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { UniversalCta } from "./cta/universal-cta";
 import { contactHref, site } from "../site-config";
 import {
   BuildingIcon,
@@ -62,18 +63,18 @@ export function Transparencia() {
             confidencialidad y la protección de datos personales.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <a
-              href={contactHref("Solicito documentos institucionales")}
-              className="rounded-lg bg-verde-bosque px-8 py-3 text-center font-semibold text-white shadow-md hover:bg-verde-bosque/90"
-            >
-              Consultar documentos institucionales
-            </a>
-            <a
-              href={contactHref("Consulta por la metodología de trazabilidad")}
-              className="rounded-lg border-2 border-verde-bosque px-8 py-3 text-center font-semibold text-verde-bosque hover:bg-white"
-            >
-              Ver metodología de trazabilidad
-            </a>
+            <UniversalCta
+              contextual="CONSULTAR_DOCUMENTOS"
+              location="transparencia"
+              variant="primary"
+              className="px-8"
+            />
+            <UniversalCta
+              contextual="VER_METODOLOGIA"
+              location="transparencia"
+              variant="secondary"
+              className="px-8"
+            />
           </div>
         </div>
 

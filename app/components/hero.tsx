@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { UniversalCta } from "./cta/universal-cta";
 import { BoltIcon, BriefcaseIcon, ShieldCheckIcon, UsersIcon } from "./icons";
 
 /**
@@ -60,18 +61,18 @@ export function Hero() {
             de los ecosistemas amazónicos.
           </p>
           <div className="flex w-full flex-col justify-center gap-4 sm:w-auto sm:flex-row">
-            <a
-              href="#programas"
-              className="rounded-lg border-2 border-white bg-black/20 px-8 py-3 text-center font-semibold backdrop-blur-sm transition-colors hover:bg-white hover:text-verde-bosque"
-            >
-              Conoce nuestros programas
-            </a>
-            <a
-              href="#donar"
-              className="rounded-lg bg-verde-hoja px-8 py-3 text-center font-semibold text-white shadow-lg transition-colors hover:bg-verde-bosque"
-            >
-              Donar ahora
-            </a>
+            <UniversalCta
+              code="VIEW_PROGRAMS"
+              location="hero"
+              variant="secondary"
+              className="border-2 border-white bg-black/20 px-8 py-3 text-white backdrop-blur-sm hover:bg-white hover:text-verde-bosque"
+            />
+            <UniversalCta
+              code="DONATE_ENTRY"
+              location="hero"
+              campaign="general"
+              className="px-8 py-3 shadow-lg"
+            />
           </div>
         </div>
       </section>

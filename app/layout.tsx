@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+import { SiteFooter } from "./components/site-footer";
+import { SiteHeader } from "./components/site-header";
 import { site, siteUrl } from "./site-config";
 
 const montserrat = Montserrat({
@@ -104,7 +106,11 @@ export default function RootLayout({
       lang="es-PE"
       className={`${montserrat.variable} ${sourceSans.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
+      </body>
     </html>
   );
 }
