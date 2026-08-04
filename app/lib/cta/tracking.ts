@@ -12,6 +12,8 @@ const CLAVE_ANONIMO = "raicescare_anonymous_id";
 export interface CtaEvent {
   ctaId: string;
   ctaLabel: string;
+  /** Código funcional del catálogo; permite agrupar sin parsear el ctaId. */
+  ctaCode: string;
   location: string;
   destination: string;
   sourcePage: string;

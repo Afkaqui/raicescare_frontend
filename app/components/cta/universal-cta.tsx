@@ -86,6 +86,7 @@ export function UniversalCta({
         trackCtaEvent({
           ctaId: `${location}_${codigo.toLowerCase()}`,
           ctaLabel: texto,
+          ctaCode: codigo,
           location,
           destination: destino,
           sourcePage:
