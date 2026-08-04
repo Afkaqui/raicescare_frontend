@@ -4,9 +4,8 @@ import {
   EncabezadoInterno,
   ProcesoEnHabilitacion,
 } from "../components/pagina-interna";
-import { ENLACES_VERIFICACION } from "../lib/cta/registry";
+import { ListaDocumentos } from "../components/documento-institucional";
 import { site } from "../site-config";
-import { ExternalLinkIcon } from "../components/icons";
 
 export const metadata: Metadata = {
   title: "Impacto y transparencia",
@@ -67,26 +66,12 @@ export default async function TransparenciaPagina({ searchParams }: Props) {
             Documentos institucionales
           </h2>
           <p className="mb-6 text-sm leading-relaxed text-gray-700">
-            Ponemos a disposición del público los documentos que permiten
-            verificar la constitución, representación y situación tributaria de
-            la {site.legalName}. Son enlaces de verificación, no de conversión.
+            Estos son los documentos que respaldan la constitución,
+            representación y situación tributaria de la {site.legalName}.
+            Publicamos su existencia y su estado; el archivo se consulta bajo
+            solicitud mientras habilitamos el acceso por niveles de usuario.
           </p>
-          <ul className="space-y-3">
-            {ENLACES_VERIFICACION.map((enlace) => (
-              <li key={enlace.id}>
-                <a
-                  href={enlace.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-verification-link={enlace.id}
-                  className="inline-flex items-center gap-2 text-sm font-bold text-verde-hoja hover:underline"
-                >
-                  {enlace.label}
-                  <ExternalLinkIcon className="h-4 w-4" />
-                </a>
-              </li>
-            ))}
-          </ul>
+          <ListaDocumentos />
           <dl className="mt-6 grid grid-cols-1 gap-4 border-t border-gray-100 pt-6 text-sm text-gray-700 sm:grid-cols-3">
             <div>
               <dt className="font-semibold text-azul-confianza">

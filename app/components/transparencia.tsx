@@ -1,12 +1,7 @@
 import Image from "next/image";
 import { UniversalCta } from "./cta/universal-cta";
 import { contactHref, site } from "../site-config";
-import {
-  BuildingIcon,
-  DocumentIcon,
-  ExternalLinkIcon,
-  ScaleIcon,
-} from "./icons";
+import { BuildingIcon, DocumentIcon, LockIcon, ScaleIcon } from "./icons";
 
 /**
  * Auditoría de textos (Ventana 17): el módulo de trazabilidad se presenta como
@@ -171,9 +166,7 @@ export function Transparencia() {
                   <strong>Jurisdicción:</strong> {site.zonaRegistral}
                 </li>
               </ul>
-              <DocumentoLink href="/documentos/certificado-literal-sunarp.pdf">
-                Consultar certificado literal
-              </DocumentoLink>
+              <EstadoDocumento />
               </div>
             </article>
 
@@ -207,9 +200,7 @@ export function Transparencia() {
                 acreditarán exclusivamente mediante las resoluciones o registros
                 vigentes emitidos por la autoridad competente.
               </p>
-              <DocumentoLink href="/documentos/ficha-ruc-sunat.pdf">
-                Consultar ficha RUC
-              </DocumentoLink>
+              <EstadoDocumento />
               </div>
             </article>
 
@@ -246,9 +237,7 @@ export function Transparencia() {
                 ))}
               </div>
               <div className="mt-auto flex flex-col gap-2">
-                <DocumentoLink href="/documentos/escritura-publica.pdf">
-                  Consultar escritura pública
-                </DocumentoLink>
+                <EstadoDocumento />
                 <a
                   href={contactHref("Solicito las políticas institucionales")}
                   className="inline-flex items-center gap-1 text-sm font-bold text-verde-hoja hover:underline"
@@ -278,22 +267,12 @@ function PiezaLegal({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-function DocumentoLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
+/** El archivo no se publica: solo se acredita que existe y está registrado. */
+function EstadoDocumento() {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="mt-auto inline-flex items-center gap-1 text-sm font-bold text-verde-hoja hover:underline"
-    >
-      {children}
-      <ExternalLinkIcon className="h-4 w-4" />
-    </a>
+    <p className="mt-auto flex items-center gap-2 border-t border-gray-100 pt-4 text-xs text-gray-500">
+      <LockIcon className="h-4 w-4 shrink-0 text-gray-400" />
+      Documento registrado · consulta restringida
+    </p>
   );
 }

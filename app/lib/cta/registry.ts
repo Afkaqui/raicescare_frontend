@@ -208,26 +208,11 @@ export const CTA_CONTEXTUALES = {
 export type CtaContextualKey = keyof typeof CTA_CONTEXTUALES;
 
 /**
- * Enlaces de verificación: acceso documental, no conversión comercial.
- * Se miden aparte (analyticsCategory: "verification").
+ * Documentos de verificación. La arquitectura los distingue de los CTA
+ * comerciales: son debida diligencia, no conversión. Hoy solo se anuncia su
+ * existencia; la consulta se habilitará por niveles de acceso.
  */
-export const ENLACES_VERIFICACION = [
-  {
-    id: "certificado_literal",
-    label: "Consultar certificado literal",
-    href: "/documentos/certificado-literal-sunarp.pdf",
-  },
-  {
-    id: "ficha_ruc",
-    label: "Consultar ficha RUC",
-    href: "/documentos/ficha-ruc-sunat.pdf",
-  },
-  {
-    id: "escritura_publica",
-    label: "Consultar escritura pública",
-    href: "/documentos/escritura-publica.pdf",
-  },
-] as const;
+export const ENLACES_VERIFICACION = [] as const;
 
 /** Construye el destino final con los parámetros de origen y preselección. */
 export function construirDestino(

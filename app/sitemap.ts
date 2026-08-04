@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { PROGRAMAS } from "./lib/programas";
-import { documentosPublicos, siteUrl } from "./site-config";
+import { siteUrl } from "./site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const actualizado = new Date();
@@ -87,12 +87,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    ...documentosPublicos.map((documento) => ({
-      url: `${siteUrl}${documento}`,
-      lastModified: actualizado,
-      changeFrequency: "yearly" as const,
-      priority: 0.5,
-    })),
   ];
 
   return rutas;

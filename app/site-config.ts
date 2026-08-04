@@ -63,11 +63,36 @@ export const equipo = [
   },
 ] as const;
 
-/** Documentos institucionales públicos, enlazados desde Transparencia. */
-export const documentosPublicos = [
-  "/documentos/certificado-literal-sunarp.pdf",
-  "/documentos/ficha-ruc-sunat.pdf",
-  "/documentos/escritura-publica.pdf",
+/**
+ * Documentos institucionales. Se anuncia su existencia y su estado, pero el
+ * archivo NO se publica: la consulta se habilitará por niveles de acceso
+ * cuando exista el repositorio documental con descarga controlada.
+ */
+export const documentosInstitucionales = [
+  {
+    id: "certificado-literal",
+    nombre: "Certificado literal de partida registral",
+    emisor: "SUNARP · Zona Registral N° VI – Sede Pucallpa",
+    acredita: "Constitución e inscripción de la asociación",
+    referencia: `Partida Registral N.° ${"11241934"}`,
+    estado: "Registrado",
+  },
+  {
+    id: "ficha-ruc",
+    nombre: "Ficha RUC",
+    emisor: "SUNAT",
+    acredita: "Situación tributaria y domicilio fiscal",
+    referencia: `RUC ${"20616229371"}`,
+    estado: "Registrado",
+  },
+  {
+    id: "escritura-publica",
+    nombre: "Escritura pública de constitución",
+    emisor: "Notaría",
+    acredita: "Estatutos, objeto social y representación",
+    referencia: "Contiene datos personales de los directivos",
+    estado: "Registrado",
+  },
 ] as const;
 
 /**

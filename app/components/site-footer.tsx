@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { contactHref, politicas, site } from "../site-config";
 import { BuildingIcon, LinkedInIcon, MailIcon, MapPinIcon } from "./icons";
 
@@ -125,17 +126,15 @@ export function SiteFooter() {
               </li>
             ))}
             <li>
-              <a
-                href="/documentos/certificado-literal-sunarp.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/transparencia"
                 className="flex items-center gap-2 transition hover:text-verde-hoja"
               >
                 <span className="text-verde-hoja" aria-hidden="true">
                   ›
                 </span>
                 Documentación legal
-              </a>
+              </Link>
             </li>
           </ul>
           <p className="mt-4 text-xs text-gray-400">
