@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import {
-  CuerpoInterno,
-  EncabezadoInterno,
-  ProcesoEnHabilitacion,
-  QueSePedira,
-} from "../../components/pagina-interna";
+import { Suspense } from "react";
+import { FormularioMaestro } from "../../components/formulario/formulario-maestro";
+import { FORMULARIO_INICIATIVA } from "../../lib/formularios/definiciones";
+import { CuerpoInterno, EncabezadoInterno } from "../../components/pagina-interna";
 
 export const metadata: Metadata = {
   title: "Evaluar mi iniciativa",
@@ -47,17 +45,6 @@ export default function EvaluacionIniciativas() {
           </ul>
         </section>
 
-        <QueSePedira
-          items={[
-            "Datos de la organización o persona proponente.",
-            "Resumen de la iniciativa, territorio y población.",
-            "Estado actual: idea, formulación, piloto o en ejecución.",
-            "Necesidad principal de fortalecimiento.",
-            "Documentación de respaldo disponible.",
-            "Autorización de tratamiento de datos personales.",
-          ]}
-        />
-
         <section className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
           <h2 className="mb-3 font-montserrat text-lg font-bold text-verde-bosque">
             Resultado de la evaluación
@@ -72,12 +59,14 @@ export default function EvaluacionIniciativas() {
             elegible → Cerrada
           </p>
         </section>
-
-        <ProcesoEnHabilitacion
-          descripcion="El formulario de elegibilidad con validación automática se habilitará en la siguiente fase. Entre tanto puedes enviarnos la información por el canal institucional: la solicitud entra al mismo proceso de evaluación."
-          asuntoContacto="Evaluación de elegibilidad de mi iniciativa"
-          etiquetaContacto="Enviar mi iniciativa"
-        />
+        <div id="formulario">
+          <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">
+            Presenta tu iniciativa
+          </h2>
+          <Suspense fallback={<p className="text-gray-600">Cargando formulario…</p>}>
+            <FormularioMaestro definicion={FORMULARIO_INICIATIVA} />
+          </Suspense>
+        </div>
       </CuerpoInterno>
     </>
   );

@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import {
-  CuerpoInterno,
-  EncabezadoInterno,
-  ProcesoEnHabilitacion,
-  QueSePedira,
-} from "../components/pagina-interna";
+import { Suspense } from "react";
+import { FormularioMaestro } from "../components/formulario/formulario-maestro";
+import { FORMULARIO_PARTICIPACION } from "../lib/formularios/definiciones";
+import { CuerpoInterno, EncabezadoInterno } from "../components/pagina-interna";
 
 export const metadata: Metadata = {
   title: "Participa en nuestra red",
@@ -60,7 +58,6 @@ const CATEGORIAS = [
 export default async function Participa({ searchParams }: Props) {
   const params = await searchParams;
   const tipo = typeof params.type === "string" ? params.type : null;
-  const programa = typeof params.program === "string" ? params.program : null;
   const seleccionada = CATEGORIAS.find((categoria) => categoria.id === tipo);
 
   return (
@@ -98,26 +95,14 @@ export default async function Participa({ searchParams }: Props) {
             );
           })}
         </ul>
-
-        <QueSePedira
-          items={[
-            "Datos de contacto y tipo de participante.",
-            "Categoría de participación y disponibilidad.",
-            "Formación, experiencia y competencias relevantes.",
-            "Programa o territorio de interés.",
-            "Autorización de tratamiento de datos personales.",
-          ]}
-        />
-
-        <ProcesoEnHabilitacion
-          descripcion="El formulario maestro de participación registrará tu postulación con un código de seguimiento y un responsable asignado. Mientras se habilita, puedes enviarnos tu interés por el canal institucional y lo incorporamos al mismo registro."
-          asuntoContacto={
-            seleccionada
-              ? `Participación: ${seleccionada.titulo}${programa ? ` (${programa})` : ""}`
-              : "Consulta por oportunidades de participación"
-          }
-          etiquetaContacto="Enviar mi interés"
-        />
+        <div id="formulario">
+          <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">
+            Postula a la red
+          </h2>
+          <Suspense fallback={<p className="text-gray-600">Cargando formulario…</p>}>
+            <FormularioMaestro definicion={FORMULARIO_PARTICIPACION} />
+          </Suspense>
+        </div>
       </CuerpoInterno>
     </>
   );

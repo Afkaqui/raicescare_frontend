@@ -8,6 +8,7 @@
 
 const CLAVE_SESION = "raicescare_session_id";
 const CLAVE_ANONIMO = "raicescare_anonymous_id";
+const CLAVE_ULTIMA_INTERACCION = "raicescare_last_interaction";
 
 export interface CtaEvent {
   ctaId: string;
@@ -74,6 +75,13 @@ export function trackCtaEvent(
 
   if (typeof window === "undefined") return interactionId;
 
+  // El formulario destino lo recupera para cerrar el círculo de trazabilidad.
+  try {
+    window.sessionStorage.setItem(CLAVE_ULTIMA_INTERACCION, interactionId);
+  } catch {
+    // Sin almacenamiento el flujo sigue: solo se pierde el enlace clic-expediente.
+  }
+
   const evento: CtaEvent = {
     ...datos,
     sessionId: obtenerSessionId(),
@@ -114,3 +122,15 @@ export function trackCtaEvent(
 
   return interactionId;
 }
+
+/** Recupera el interactionId del clic que trajo al visitante hasta aquí. */
+export function obtenerUltimaInteraccion(): string | null {
+  if (typeof window === "undefined") return null;
+  try {
+    return window.sessionStorage.getItem(CLAVE_ULTIMA_INTERACCION);
+  } catch {
+    return null;
+  }
+}
+
+export const API_BASE_URL = API_BASE;

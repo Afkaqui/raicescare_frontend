@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import {
-  CuerpoInterno,
-  EncabezadoInterno,
-  ProcesoEnHabilitacion,
-  QueSePedira,
-} from "../../components/pagina-interna";
+import { Suspense } from "react";
+import { FormularioMaestro } from "../../components/formulario/formulario-maestro";
+import { FORMULARIO_ALIANZA } from "../../lib/formularios/definiciones";
+import { CuerpoInterno, EncabezadoInterno } from "../../components/pagina-interna";
 
 export const metadata: Metadata = {
   title: "Proponer una alianza",
@@ -66,28 +64,14 @@ export default async function ProponerAlianza({ searchParams }: Props) {
             </p>
           )}
         </section>
-
-        <QueSePedira
-          items={[
-            "Organización proponente y tipo de entidad.",
-            "Persona de contacto y cargo.",
-            "Tipo de alianza y objetivo de la colaboración.",
-            "Territorio, población y línea de acción relacionada.",
-            "Recursos, capacidades o aportes previstos por cada parte.",
-            "Plazos estimados y documentación de respaldo.",
-            "Autorización de tratamiento de datos personales.",
-          ]}
-        />
-
-        <ProcesoEnHabilitacion
-          descripcion="La propuesta abrirá un expediente con código de seguimiento, responsable asignado y plazos de respuesta. La aceptación estará sujeta a evaluación técnica, legal, financiera y reputacional; RaícesCare no garantiza la obtención de financiamiento ni la selección en convocatorias."
-          asuntoContacto={
-            seleccionado
-              ? `Propuesta de alianza: ${seleccionado.titulo}`
-              : "Propuesta de alianza institucional"
-          }
-          etiquetaContacto="Enviar mi propuesta"
-        />
+        <div id="formulario">
+          <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">
+            Envía tu propuesta
+          </h2>
+          <Suspense fallback={<p className="text-gray-600">Cargando formulario…</p>}>
+            <FormularioMaestro definicion={FORMULARIO_ALIANZA} />
+          </Suspense>
+        </div>
       </CuerpoInterno>
     </>
   );

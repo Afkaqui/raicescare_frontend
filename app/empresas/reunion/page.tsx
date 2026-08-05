@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import {
-  CuerpoInterno,
-  EncabezadoInterno,
-  ProcesoEnHabilitacion,
-  QueSePedira,
-} from "../../components/pagina-interna";
+import { Suspense } from "react";
+import { FormularioMaestro } from "../../components/formulario/formulario-maestro";
+import { FORMULARIO_REUNION } from "../../lib/formularios/definiciones";
+import { CuerpoInterno, EncabezadoInterno } from "../../components/pagina-interna";
 
 export const metadata: Metadata = {
   title: "Solicitar una reunión institucional",
@@ -47,17 +45,6 @@ export default function ReunionInstitucional() {
           </ul>
         </section>
 
-        <QueSePedira
-          items={[
-            "Organización, sector y tipo de entidad.",
-            "Persona de contacto, cargo y medio de contacto.",
-            "Motivo principal de la reunión.",
-            "Alcance previsto y territorio de interés.",
-            "Plazos o hitos relevantes.",
-            "Autorización de tratamiento de datos personales.",
-          ]}
-        />
-
         <section className="rounded-xl border border-gray-200 bg-white p-6 text-sm leading-relaxed text-gray-700 shadow-sm">
           <h2 className="mb-3 font-montserrat text-lg font-bold text-verde-bosque">
             Nota legal
@@ -69,12 +56,14 @@ export default function ReunionInstitucional() {
             RaícesCare. Cada colaboración será evaluada individualmente.
           </p>
         </section>
-
-        <ProcesoEnHabilitacion
-          descripcion="El formulario B2B con clasificación automática y agenda controlada se habilitará en la siguiente fase. Mientras tanto coordinamos la reunión por el canal institucional y registramos la solicitud con el mismo expediente."
-          asuntoContacto="Solicitud de reunión institucional"
-          etiquetaContacto="Solicitar la reunión por correo"
-        />
+        <div id="formulario">
+          <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">
+            Solicita la reunión
+          </h2>
+          <Suspense fallback={<p className="text-gray-600">Cargando formulario…</p>}>
+            <FormularioMaestro definicion={FORMULARIO_REUNION} />
+          </Suspense>
+        </div>
       </CuerpoInterno>
     </>
   );
