@@ -55,6 +55,7 @@ export function FormularioMaestro({
   const [enviando, setEnviando] = useState(false);
   const [fallo, setFallo] = useState<string | null>(null);
   const [codigo, setCodigo] = useState<string | null>(null);
+  const [pagoFallido, setPagoFallido] = useState(false);
 
   const totalPasos = definicion.pasos.length + 1; // +1: consentimientos
   const esPasoConsentimientos = paso === definicion.pasos.length;
@@ -84,6 +85,15 @@ export function FormularioMaestro({
         nuevos[campo.nombre] = "Este dato es obligatorio";
       } else if (campo.tipo === "email" && valor && !/^\S+@\S+\.\S+$/.test(valor)) {
         nuevos[campo.nombre] = "Revisa el formato del correo";
+      } else if ((campo.tipo === "monto" || campo.tipo === "numero") && valor) {
+        const numero = Number(valor);
+        if (!Number.isFinite(numero) || numero <= 0) {
+          nuevos[campo.nombre] = "Escribe un importe válido";
+        } else if (campo.minimo !== undefined && numero < campo.minimo) {
+          nuevos[campo.nombre] = `El mínimo es ${campo.prefijo ?? ""} ${campo.minimo}`.trim();
+        } else if (campo.maximo !== undefined && numero > campo.maximo) {
+          nuevos[campo.nombre] = `El máximo por operación es ${campo.prefijo ?? ""} ${campo.maximo}`.trim();
+        }
       }
     }
     setErrores(nuevos);
@@ -153,6 +163,11 @@ export function FormularioMaestro({
 
       const datos = (await respuesta.json()) as { trackingCode: string };
       setCodigo(datos.trackingCode);
+
+      if (definicion.pago) {
+        await irAPasarela(datos.trackingCode);
+        return;
+      }
     } catch {
       setFallo(
         "No pudimos registrar la solicitud en este momento. Vuelve a intentarlo o escríbenos al correo institucional.",
@@ -162,15 +177,69 @@ export function FormularioMaestro({
     }
   }
 
+  /**
+   * El expediente ya existe: si la pasarela falla, no se pierde nada. Se le
+   * muestra el código al aportante para que pueda retomarlo.
+   */
+  async function irAPasarela(trackingCode: string) {
+    const pago = definicion.pago;
+    if (!pago) return;
+
+    const recurrente = valores[pago.campoModalidad] === pago.valorRecurrente;
+    const ruta = recurrente ? "subscription" : "checkout";
+
+    try {
+      const respuesta = await fetch(`${API_BASE_URL}/api/v1/payments/${ruta}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          trackingCode,
+          amount: Number(valores[pago.campoMonto]),
+          currency: pago.moneda,
+          email: valores.email,
+          ...(recurrente ? { frequency: 1, frequencyType: "months" } : {}),
+        }),
+      });
+
+      if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
+
+      const { initPoint } = (await respuesta.json()) as { initPoint: string };
+      window.location.href = initPoint;
+    } catch {
+      setPagoFallido(true);
+      setEnviando(false);
+    }
+  }
+
+  // Mientras el navegador viaja a MercadoPago.
+  if (codigo && definicion.pago && !pagoFallido) {
+    return (
+      <section className="rounded-xl border-t-4 border-verde-hoja bg-white p-8 text-center shadow-sm">
+        <h2 className="mb-3 font-montserrat text-2xl font-bold text-verde-bosque">
+          Te llevamos al pago seguro
+        </h2>
+        <p className="mb-2 text-gray-700">
+          Tu aporte quedó registrado con el código{" "}
+          <strong className="whitespace-nowrap">{codigo}</strong>.
+        </p>
+        <p className="text-sm text-gray-600">
+          Estamos abriendo el entorno de MercadoPago. Si no ocurre nada en unos
+          segundos, revisa que tu navegador no haya bloqueado la redirección.
+        </p>
+      </section>
+    );
+  }
+
   if (codigo) {
     return (
       <section className="rounded-xl border-t-4 border-verde-hoja bg-white p-8 shadow-sm">
         <h2 className="mb-3 font-montserrat text-2xl font-bold text-verde-bosque">
-          Solicitud recibida
+          {pagoFallido ? "Registramos tu aporte, falta el pago" : "Solicitud recibida"}
         </h2>
         <p className="mb-6 text-gray-700">
-          Guarda este código: con él puedes consultar el estado de tu solicitud
-          en cualquier momento.
+          {pagoFallido
+            ? "No pudimos abrir la pasarela de pago, pero tu aporte ya quedó registrado con este código. Escríbenos con él y coordinamos el pago por otro medio."
+            : "Guarda este código: con él puedes consultar el estado de tu solicitud en cualquier momento."}
         </p>
         <p className="mb-6 rounded-lg border border-verde-hoja/40 bg-verde-hoja/10 px-6 py-4 text-center font-montserrat text-2xl font-bold tracking-wide text-verde-bosque">
           {codigo}
@@ -301,7 +370,9 @@ export function FormularioMaestro({
             disabled={enviando}
             className="rounded-lg bg-verde-hoja px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-verde-bosque disabled:opacity-60"
           >
-            {enviando ? "Enviando…" : "Enviar solicitud"}
+            {enviando
+              ? "Enviando…"
+              : (definicion.etiquetaEnvio ?? "Enviar solicitud")}
           </button>
         ) : (
           <button
@@ -343,7 +414,50 @@ function CampoFormulario({
         {campo.requerido && <span className="ml-1 text-verde-hoja">*</span>}
       </label>
 
-      {campo.tipo === "textarea" ? (
+      {campo.tipo === "monto" ? (
+        <div className="space-y-3">
+          {campo.opciones && campo.opciones.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {campo.opciones.map((opcion) => {
+                const activo = valor === opcion.valor;
+                return (
+                  <button
+                    key={opcion.valor}
+                    type="button"
+                    onClick={() => alCambiar(opcion.valor)}
+                    aria-pressed={activo}
+                    className={`rounded-lg border px-4 py-2 text-sm font-semibold transition ${
+                      activo
+                        ? "border-verde-hoja bg-verde-hoja text-white"
+                        : "border-gray-300 text-gray-700 hover:border-verde-hoja"
+                    }`}
+                  >
+                    {opcion.etiqueta}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            {campo.prefijo && (
+              <span className="font-montserrat text-lg font-bold text-verde-bosque">
+                {campo.prefijo}
+              </span>
+            )}
+            <input
+              id={id}
+              type="number"
+              inputMode="decimal"
+              min={campo.minimo}
+              max={campo.maximo}
+              step="0.01"
+              value={valor}
+              onChange={(evento) => alCambiar(evento.target.value)}
+              className={clases}
+            />
+          </div>
+        </div>
+      ) : campo.tipo === "textarea" ? (
         <textarea
           id={id}
           rows={4}

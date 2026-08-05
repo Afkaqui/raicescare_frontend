@@ -477,3 +477,133 @@ export const FORMULARIO_INICIATIVA: DefinicionFormulario = {
     { tipo: "due_diligence", etiqueta: "Entiendo que RaícesCare no garantiza financiamiento ni selección en convocatorias, y que la iniciativa pasará por revisión reputacional.", obligatorio: true },
   ],
 };
+
+/**
+ * Aporte — el único formulario que continúa hacia una pasarela. El expediente
+ * se abre antes de cobrar: si el pago se abandona, queda el rastro y el
+ * aportante puede retomarlo con su código.
+ */
+export const FORMULARIO_APORTE: DefinicionFormulario = {
+  requestType: "contribution",
+  titulo: "Realizar un aporte",
+  descripcion:
+    "Elige la modalidad, el monto y la finalidad de tu contribución. El pago se procesa en el entorno seguro de MercadoPago.",
+  campoCategoria: "modalidad",
+  etiquetaEnvio: "Continuar al pago",
+  pago: {
+    campoMonto: "monto",
+    campoModalidad: "modalidad",
+    valorRecurrente: "recurring",
+    moneda: "PEN",
+  },
+  pasos: [
+    {
+      titulo: "Tu aporte",
+      descripcion:
+        "El aporte recurrente se cobra cada mes y puedes cancelarlo cuando quieras desde tu cuenta de MercadoPago o escribiéndonos.",
+      campos: [
+        {
+          nombre: "modalidad",
+          etiqueta: "Modalidad",
+          tipo: "select",
+          requerido: true,
+          desdeParametro: "type",
+          opciones: [
+            { valor: "single", etiqueta: "Aporte único" },
+            { valor: "recurring", etiqueta: "Aporte mensual" },
+          ],
+        },
+        {
+          nombre: "monto",
+          etiqueta: "Monto del aporte",
+          tipo: "monto",
+          requerido: true,
+          prefijo: "S/",
+          minimo: 5,
+          maximo: 50000,
+          ayuda: "En soles. Puedes elegir un monto sugerido o escribir el tuyo.",
+          opciones: [
+            { valor: "20", etiqueta: "S/ 20" },
+            { valor: "50", etiqueta: "S/ 50" },
+            { valor: "100", etiqueta: "S/ 100" },
+            { valor: "200", etiqueta: "S/ 200" },
+          ],
+        },
+      ],
+    },
+    {
+      titulo: "Finalidad",
+      descripcion:
+        "Cuando no se indica una finalidad específica, el aporte se asigna según las prioridades institucionales informadas.",
+      campos: [
+        {
+          nombre: "destino",
+          etiqueta: "¿A qué deseas destinarlo?",
+          tipo: "select",
+          requerido: true,
+          opciones: [
+            { valor: "general", etiqueta: "Donde más se necesite" },
+            { valor: "salud", etiqueta: "Raíces de Salud y Cuidado" },
+            { valor: "educacion", etiqueta: "Semillas de Educación" },
+            { valor: "bioamazonia", etiqueta: "Bio-Amazonía y Ecosistemas" },
+            { valor: "cooperacion", etiqueta: "Redes de Cooperación y Alianzas" },
+          ],
+        },
+        {
+          nombre: "dedicatoria",
+          etiqueta: "Dedicatoria o mensaje (opcional)",
+          tipo: "textarea",
+          ayuda: "Si tu aporte honra a alguien, cuéntanos.",
+        },
+      ],
+    },
+    {
+      titulo: "Tus datos",
+      descripcion:
+        "Necesitamos el correo para enviarte la confirmación y, si corresponde, la constancia del aporte.",
+      campos: [
+        {
+          nombre: "nombreCompleto",
+          etiqueta: "Nombre completo",
+          tipo: "texto",
+          requerido: true,
+        },
+        {
+          nombre: "email",
+          etiqueta: "Correo electrónico",
+          tipo: "email",
+          requerido: true,
+        },
+        { nombre: "telefono", etiqueta: "Teléfono (opcional)", tipo: "telefono" },
+        {
+          nombre: "pais",
+          etiqueta: "País",
+          tipo: "texto",
+          marcador: "Perú",
+        },
+      ],
+    },
+  ],
+  consentimientos: [
+    {
+      tipo: "privacy",
+      etiqueta:
+        "Autorizo el tratamiento de mis datos personales conforme a la política de privacidad de RaícesCare.",
+      obligatorio: true,
+    },
+    {
+      tipo: "contribution_terms",
+      etiqueta:
+        "Entiendo que la emisión de constancias y cualquier efecto tributario dependen de la normativa aplicable y de la condición registral vigente de RaícesCare, y que este aporte no garantiza por sí mismo un beneficio fiscal.",
+      obligatorio: true,
+    },
+    {
+      tipo: "communications",
+      etiqueta:
+        "Quiero recibir información sobre el uso de los aportes y las actividades de RaícesCare.",
+      obligatorio: false,
+    },
+  ],
+  avisoPrivacidad:
+    "Los datos que nos entregues se usan para registrar y dar seguimiento a tu aporte, emitir la constancia que corresponda y comunicarte su resultado. El pago se procesa íntegramente en el entorno de MercadoPago: RaícesCare no recibe ni almacena los datos de tu tarjeta.",
+};

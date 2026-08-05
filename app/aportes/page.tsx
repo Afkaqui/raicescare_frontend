@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { FormularioMaestro } from "../components/formulario/formulario-maestro";
+import { FORMULARIO_APORTE } from "../lib/formularios/definiciones";
 import {
   CuerpoInterno,
   EncabezadoInterno,
-  ProcesoEnHabilitacion,
   QueSePedira,
 } from "../components/pagina-interna";
 import { site } from "../site-config";
@@ -64,6 +66,17 @@ export default async function Aportes({ searchParams }: Props) {
           </section>
         )}
 
+        <div id="formulario">
+          <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">
+            Realiza tu aporte
+          </h2>
+          <Suspense
+            fallback={<p className="text-gray-600">Cargando formulario…</p>}
+          >
+            <FormularioMaestro definicion={FORMULARIO_APORTE} />
+          </Suspense>
+        </div>
+
         <QueSePedira
           titulo="Qué verás antes de confirmar un aporte"
           items={[
@@ -77,17 +90,6 @@ export default async function Aportes({ searchParams }: Props) {
           ]}
         />
 
-        <ProcesoEnHabilitacion
-          titulo="Pasarela de pago en habilitación"
-          descripcion="El flujo de aporte en línea (modalidad, finalidad, monto, datos, consentimientos y pago) se habilitará junto con la pasarela formal. Mientras tanto podemos coordinar tu aporte por el canal institucional y enviarte las condiciones aplicables."
-          asuntoContacto={
-            modalidad
-              ? `Coordinar ${modalidad.titulo.toLowerCase()}`
-              : "Consulta sobre formas de colaborar"
-          }
-          etiquetaContacto="Coordinar mi aporte"
-        />
-
         <section className="rounded-xl border border-gray-200 bg-white p-6 text-sm leading-relaxed text-gray-700 shadow-sm">
           <h2 className="mb-3 font-montserrat text-lg font-bold text-verde-bosque">
             Información sobre los aportes
@@ -97,6 +99,10 @@ export default async function Aportes({ searchParams }: Props) {
             controles documentales conforme a sus procedimientos internos y a
             las obligaciones legales aplicables. Partida Registral N.°{" "}
             {site.partidaRegistral} · RUC N.° {site.ruc}.
+          </p>
+          <p className="mb-3">
+            El pago se procesa íntegramente en el entorno de MercadoPago.
+            RaícesCare no recibe ni almacena los datos de tu tarjeta.
           </p>
           <p>
             La emisión de constancias y cualquier tratamiento tributario
