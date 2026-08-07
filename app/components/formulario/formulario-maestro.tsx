@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import {
   API_BASE_URL,
   obtenerUltimaInteraccion,
+  olvidarUltimaInteraccion,
 } from "../../lib/cta/tracking";
 import {
   VERSION_POLITICA,
@@ -163,6 +164,7 @@ export function FormularioMaestro({
 
       const datos = (await respuesta.json()) as { trackingCode: string };
       setCodigo(datos.trackingCode);
+      olvidarUltimaInteraccion();
 
       if (definicion.pago) {
         await irAPasarela(datos.trackingCode);

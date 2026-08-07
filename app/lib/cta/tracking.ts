@@ -133,4 +133,19 @@ export function obtenerUltimaInteraccion(): string | null {
   }
 }
 
+/**
+ * Se olvida la interacción ya convertida en expediente. Sin esto, un segundo
+ * trámite en la misma sesión reenviaría el identificador gastado y quedaría sin
+ * trazabilidad; así, el próximo clic abre una interacción nueva y la cadena se
+ * mantiene entera para cada solicitud.
+ */
+export function olvidarUltimaInteraccion(): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.removeItem(CLAVE_ULTIMA_INTERACCION);
+  } catch {
+    // Sin sessionStorage no hay nada que limpiar.
+  }
+}
+
 export const API_BASE_URL = API_BASE;
