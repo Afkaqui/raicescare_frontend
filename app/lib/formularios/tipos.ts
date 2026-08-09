@@ -60,7 +60,10 @@ export interface ConfiguracionPago {
   campoModalidad: string;
   /** Valor de `campoModalidad` que significa recurrente. */
   valorRecurrente: string;
+  /** Moneda por defecto si el formulario no deja elegirla. */
   moneda: "PEN" | "USD";
+  /** Campo que permite al aportante elegir moneda. */
+  campoMoneda?: string;
 }
 
 export interface DefinicionFormulario {

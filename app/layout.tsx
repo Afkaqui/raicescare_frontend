@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
+import { AvisoCookies } from "./components/aviso-cookies";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { site, siteUrl } from "./site-config";
@@ -110,6 +111,7 @@ export default function RootLayout({
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <AvisoCookies />
       </body>
     </html>
   );

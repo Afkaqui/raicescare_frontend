@@ -6,6 +6,8 @@
  * ignora silenciosamente.
  */
 
+import { hayConsentimientoDeMedicion } from "../consentimiento";
+
 const CLAVE_SESION = "raicescare_session_id";
 const CLAVE_ANONIMO = "raicescare_anonymous_id";
 const CLAVE_ULTIMA_INTERACCION = "raicescare_last_interaction";
@@ -74,6 +76,11 @@ export function trackCtaEvent(
   const interactionId = nuevoId();
 
   if (typeof window === "undefined") return interactionId;
+
+  // Sin consentimiento no se mide. Se devuelve igual un identificador para que
+  // el formulario destino siga funcionando: el expediente se abrirá sin enlace
+  // a la interacción, que es exactamente lo que el backend ya tolera.
+  if (!hayConsentimientoDeMedicion()) return interactionId;
 
   // El formulario destino lo recupera para cerrar el círculo de trazabilidad.
   try {

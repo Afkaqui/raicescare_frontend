@@ -197,7 +197,9 @@ export function FormularioMaestro({
         body: JSON.stringify({
           trackingCode,
           amount: Number(valores[pago.campoMonto]),
-          currency: pago.moneda,
+          currency: pago.campoMoneda
+            ? (valores[pago.campoMoneda] ?? pago.moneda)
+            : pago.moneda,
           email: valores.email,
           ...(recurrente ? { frequency: 1, frequencyType: "months" } : {}),
         }),
@@ -351,7 +353,17 @@ export function FormularioMaestro({
           {definicion.pasos[paso].campos.filter(visible).map((campo) => (
             <CampoFormulario
               key={campo.nombre}
-              campo={campo}
+              campo={
+                campo.tipo === "monto" && definicion.pago?.campoMoneda
+                  ? {
+                      ...campo,
+                      prefijo:
+                        valores[definicion.pago.campoMoneda] === "USD"
+                          ? "US$"
+                          : "S/",
+                    }
+                  : campo
+              }
               valor={valores[campo.nombre] ?? ""}
               error={errores[campo.nombre]}
               alCambiar={(valor) =>

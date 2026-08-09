@@ -495,6 +495,7 @@ export const FORMULARIO_APORTE: DefinicionFormulario = {
     campoModalidad: "modalidad",
     valorRecurrente: "recurring",
     moneda: "PEN",
+    campoMoneda: "moneda",
   },
   pasos: [
     {
@@ -514,14 +515,24 @@ export const FORMULARIO_APORTE: DefinicionFormulario = {
           ],
         },
         {
+          nombre: "moneda",
+          etiqueta: "Moneda",
+          tipo: "select",
+          requerido: true,
+          ayuda: "Los aportes desde el exterior pueden hacerse en dólares.",
+          opciones: [
+            { valor: "PEN", etiqueta: "Soles (S/)" },
+            { valor: "USD", etiqueta: "Dólares (US$)" },
+          ],
+        },
+        {
           nombre: "monto",
           etiqueta: "Monto del aporte",
           tipo: "monto",
           requerido: true,
-          prefijo: "S/",
           minimo: 5,
           maximo: 50000,
-          ayuda: "En soles. Puedes elegir un monto sugerido o escribir el tuyo.",
+          ayuda: "Elige un monto sugerido o escribe el tuyo.",
           opciones: [
             { valor: "20", etiqueta: "S/ 20" },
             { valor: "50", etiqueta: "S/ 50" },
