@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { DOCUMENTOS } from "./lib/politicas/documentos";
 import { PROGRAMAS } from "./lib/programas";
 import { siteUrl } from "./site-config";
 
@@ -87,6 +88,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: `${siteUrl}/politicas`,
+      lastModified: actualizado,
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    // Los documentos legales deben ser encontrables: forman parte de lo que se
+    // le debe al titular de los datos, no son letra chica escondida.
+    ...DOCUMENTOS.map((documento) => ({
+      url: `${siteUrl}/politicas/${documento.slug}`,
+      lastModified: actualizado,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+    })),
   ];
 
   return rutas;

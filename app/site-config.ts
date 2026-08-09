@@ -99,13 +99,14 @@ export const documentosInstitucionales = [
  * Políticas exigidas por la auditoría. Mientras no estén redactadas y
  * publicadas, cada enlace abre una solicitud al correo institucional.
  */
+/** Documentos legales publicados. El pie enlaza a la página, no al correo. */
 export const politicas = [
-  "Política de privacidad",
-  "Tratamiento de datos personales",
-  "Términos de uso",
-  "Política de aportes y devoluciones",
-  "Políticas institucionales",
-  "Canal de consultas e integridad",
+  { titulo: "Política de privacidad", href: "/politicas/privacidad" },
+  { titulo: "Tratamiento de datos personales", href: "/politicas/datos-personales" },
+  { titulo: "Política de cookies", href: "/politicas/cookies" },
+  { titulo: "Términos de uso", href: "/politicas/terminos" },
+  { titulo: "Aportes y devoluciones", href: "/politicas/aportes-y-devoluciones" },
+  { titulo: "Canal de consultas e integridad", href: "/politicas/integridad" },
 ] as const;
 
 /** Anclas absolutas: funcionan igual desde la portada y desde las rutas internas. */

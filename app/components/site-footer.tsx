@@ -113,16 +113,16 @@ export function SiteFooter() {
           </h2>
           <ul className="space-y-3 text-sm text-gray-300">
             {politicas.map((politica) => (
-              <li key={politica}>
-                <a
-                  href={contactHref(`Solicito: ${politica}`)}
+              <li key={politica.href}>
+                <Link
+                  href={politica.href}
                   className="flex items-center gap-2 transition hover:text-verde-hoja"
                 >
                   <span className="text-verde-hoja" aria-hidden="true">
                     ›
                   </span>
-                  {politica}
-                </a>
+                  {politica.titulo}
+                </Link>
               </li>
             ))}
             <li>

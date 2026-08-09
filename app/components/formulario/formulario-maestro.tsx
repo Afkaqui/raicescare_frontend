@@ -289,9 +289,28 @@ export function FormularioMaestro({
 
       {esPasoConsentimientos ? (
         <div className="space-y-4">
-          <p className="rounded-lg border border-gray-200 bg-gris-niebla/60 p-4 text-sm leading-relaxed text-gray-700">
-            {definicion.avisoPrivacidad}
-          </p>
+          <div className="rounded-lg border border-gray-200 bg-gris-niebla/60 p-4 text-sm leading-relaxed text-gray-700">
+            <p>{definicion.avisoPrivacidad}</p>
+            {/* No se puede pedir consentimiento sobre un documento que la
+                persona no pueda leer en ese mismo momento. */}
+            <p className="mt-3">
+              <Link
+                href="/politicas/privacidad"
+                target="_blank"
+                className="font-semibold text-verde-hoja hover:underline"
+              >
+                Leer la política de privacidad
+              </Link>
+              {" · "}
+              <Link
+                href="/politicas/datos-personales"
+                target="_blank"
+                className="font-semibold text-verde-hoja hover:underline"
+              >
+                Tratamiento de datos personales
+              </Link>
+            </p>
+          </div>
           {definicion.consentimientos.map((consentimiento) => (
             <label
               key={consentimiento.tipo}
