@@ -56,6 +56,7 @@ export function MarcoAdmin({ children }: { children: React.ReactNode }) {
 
   const enlaces = [
     { href: "/admin", etiqueta: "Bandeja" },
+    { href: "/admin/contenidos", etiqueta: "Contenidos" },
     ...(actor.role === "superadmin"
       ? [{ href: "/admin/cuentas", etiqueta: "Cuentas" }]
       : []),

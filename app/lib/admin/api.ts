@@ -44,12 +44,126 @@ export const api = {
   bandeja: (parametros: URLSearchParams) =>
     pedir<Bandeja>(`/backoffice/requests?${parametros.toString()}`),
   expediente: (id: string) => pedir<Expediente>(`/backoffice/requests/${id}`),
+  contenidos: (kind?: string) =>
+    pedir<Contenido[]>(`/backoffice/content${kind ? `?kind=${kind}` : ""}`),
+  contenido: (id: string) => pedir<Contenido>(`/backoffice/content/${id}`),
+  crearContenido: (cuerpo: ContenidoForm) =>
+    pedir<Contenido>("/backoffice/content", {
+      method: "POST",
+      body: JSON.stringify(cuerpo),
+    }),
+  guardarContenido: (id: string, cuerpo: ContenidoForm) =>
+    pedir<Contenido>(`/backoffice/content/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(cuerpo),
+    }),
+  eliminarContenido: (id: string) =>
+    pedir<{ eliminado: boolean }>(`/backoffice/content/${id}`, {
+      method: "DELETE",
+    }),
+  biblioteca: () => pedir<Archivo[]>("/backoffice/media"),
   transicionar: (id: string, cuerpo: Transicion) =>
     pedir<{ trackingCode: string; previousStatus: string; status: string }>(
       `/requests/${id}/status-transitions`,
       { method: "POST", body: JSON.stringify(cuerpo) },
     ),
 };
+
+export type Archivo = {
+  id: string;
+  url: string;
+  originalName: string;
+  width: number | null;
+  height: number | null;
+  altText: string | null;
+};
+
+export type Contenido = {
+  id: string;
+  kind: string;
+  slug: string;
+  title: string;
+  summary: string;
+  body: string;
+  programCode: string | null;
+  location: string | null;
+  startsOn: string | null;
+  endsOn: string | null;
+  goalAmount: string | null;
+  goalCurrency: string | null;
+  coverMediaId: string | null;
+  status: string;
+  publishedAt: string | null;
+  updatedAt: string;
+  portada: { storageKey: string; altText: string | null } | null;
+};
+
+export type ContenidoForm = {
+  kind: string;
+  slug: string;
+  title: string;
+  summary: string;
+  body: string;
+  programCode?: string;
+  location?: string;
+  startsOn?: string;
+  endsOn?: string;
+  goalAmount?: number;
+  goalCurrency?: string;
+  coverMediaId?: string;
+  status: string;
+};
+
+export const ETIQUETA_CONTENIDO: Record<string, string> = {
+  campaign: "Campaña",
+  initiative: "Iniciativa",
+  project: "Proyecto",
+};
+
+export const PROGRAMAS_CODIGO = [
+  { valor: "salud", etiqueta: "Raíces de Salud y Cuidado" },
+  { valor: "educacion", etiqueta: "Semillas de Educación" },
+  { valor: "bioamazonia", etiqueta: "Bio-Amazonía y Ecosistemas" },
+  { valor: "cooperacion", etiqueta: "Redes de Cooperación y Alianzas" },
+];
+
+/** Convierte un título en una dirección limpia, sin acentos ni signos. */
+export function aSlug(texto: string): string {
+  return texto
+    .normalize("NFD")
+    // Marcas de acento que NFD dejó sueltas.
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 120);
+}
+
+/** Sube el archivo aparte: el resto de la API va en JSON, esto en multipart. */
+export async function subirArchivo(
+  archivo: File,
+  altText: string,
+): Promise<Archivo> {
+  const cuerpo = new FormData();
+  cuerpo.append("archivo", archivo);
+  if (altText) cuerpo.append("altText", altText);
+
+  const respuesta = await fetch(`${API_BASE_URL}/api/v1/backoffice/media`, {
+    method: "POST",
+    credentials: "include",
+    body: cuerpo,
+  });
+
+  if (respuesta.status === 401) throw new SesionExpirada();
+  if (!respuesta.ok) {
+    const datos = (await respuesta.json().catch(() => null)) as {
+      message?: string;
+    } | null;
+    throw new Error(datos?.message ?? "No se pudo subir la imagen");
+  }
+
+  return respuesta.json() as Promise<Archivo>;
+}
 
 export type Actor = {
   id: string;
