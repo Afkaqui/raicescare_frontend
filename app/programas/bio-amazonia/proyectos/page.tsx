@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CatalogoVacio } from "../../../components/catalogo-vacio";
+import { CatalogoContenido } from "../../../components/catalogo-contenido";
 import {
   CuerpoInterno,
   EncabezadoInterno,
@@ -25,10 +25,15 @@ export default function ProyectosBioAmazonia() {
       />
 
       <CuerpoInterno>
-        <CatalogoVacio
-          titulo="No hay proyectos ambientales publicados"
-          descripcion="Cada proyecto se publicará con su ficha completa: ubicación, presupuesto, derechos sobre el área, metodología y sistema de monitoreo. Hasta entonces no se difunden fichas parciales."
-          programa="environment"
+        <CatalogoContenido
+          kind="project"
+          programa="bioamazonia"
+          vacio={{
+            titulo: "No hay proyectos ambientales publicados",
+            descripcion:
+              "Cada proyecto se publicará con su ficha completa: ubicación, presupuesto, derechos sobre el área, metodología y sistema de monitoreo. Hasta entonces no se difunden fichas parciales.",
+            programaCta: "environment",
+          }}
         />
       </CuerpoInterno>
     </>

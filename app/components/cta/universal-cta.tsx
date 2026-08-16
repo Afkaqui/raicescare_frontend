@@ -20,7 +20,9 @@ type UbicacionCta =
   | "transparencia"
   | "donaciones"
   | "participa"
-  | "empresas";
+  | "empresas"
+  // Página de una campaña, iniciativa o proyecto publicado desde el panel.
+  | "contenido";
 
 type PropsBase = {
   /** Dónde aparece el botón. Se usa para separar el origen en la analítica. */

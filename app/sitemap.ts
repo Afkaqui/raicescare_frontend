@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { DOCUMENTOS } from "./lib/politicas/documentos";
+import { RUTA_POR_TIPO, listarContenido } from "./lib/contenido";
 import { PROGRAMAS } from "./lib/programas";
 import { siteUrl } from "./site-config";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const actualizado = new Date();
 
   const rutas: MetadataRoute.Sitemap = [
@@ -102,7 +103,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.3,
     })),
+    ...(["campanas", "iniciativas", "proyectos"] as const).map((ruta) => ({
+      url: `${siteUrl}/${ruta}`,
+      lastModified: actualizado,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
   ];
 
-  return rutas;
+  // Lo publicado desde el panel entra al sitemap solo; si la API no responde,
+  // el sitemap sigue siendo válido con las rutas fijas.
+  const publicados = (
+    await Promise.all(
+      (["campaign", "initiative", "project"] as const).map((kind) =>
+        listarContenido(kind),
+      ),
+    )
+  ).flat();
+
+  return [
+    ...rutas,
+    ...publicados.map((item) => ({
+      url: `${siteUrl}/${RUTA_POR_TIPO[item.kind as keyof typeof RUTA_POR_TIPO]}/${item.slug}`,
+      lastModified: item.publishedAt ? new Date(item.publishedAt) : actualizado,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })),
+  ];
 }

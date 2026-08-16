@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CatalogoVacio } from "../../../components/catalogo-vacio";
+import { CatalogoContenido } from "../../../components/catalogo-contenido";
 import {
   CuerpoInterno,
   EncabezadoInterno,
@@ -25,10 +25,15 @@ export default function IniciativasEducacion() {
       />
 
       <CuerpoInterno>
-        <CatalogoVacio
-          titulo="No hay iniciativas educativas publicadas"
-          descripcion="Las iniciativas se incorporarán cuando cuenten con contenidos definidos, comunidades participantes y validación institucional. Mientras tanto puedes registrar tu interés en participar como mentor o proponer una colaboración."
-          programa="education"
+        <CatalogoContenido
+          kind="initiative"
+          programa="educacion"
+          vacio={{
+            titulo: "No hay iniciativas educativas publicadas",
+            descripcion:
+              "Las iniciativas se incorporarán cuando cuenten con contenidos definidos, comunidades participantes y validación institucional. Mientras tanto puedes registrar tu interés en participar como mentor o proponer una colaboración.",
+            programaCta: "education",
+          }}
         />
       </CuerpoInterno>
     </>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CatalogoVacio } from "../../../components/catalogo-vacio";
+import { CatalogoContenido } from "../../../components/catalogo-contenido";
 import {
   CuerpoInterno,
   EncabezadoInterno,
@@ -25,10 +25,15 @@ export default function CampanasSalud() {
       />
 
       <CuerpoInterno>
-        <CatalogoVacio
-          titulo="No hay campañas activas publicadas"
-          descripcion="Las campañas se incorporarán cuando hayan completado su proceso de revisión y cuenten con información suficiente para su publicación: finalidad, costos, inventario, destino y protocolo de entrega."
-          programa="health_care"
+        <CatalogoContenido
+          kind="campaign"
+          programa="salud"
+          vacio={{
+            titulo: "No hay campañas activas publicadas",
+            descripcion:
+              "Las campañas se incorporarán cuando hayan completado su proceso de revisión y cuenten con información suficiente para su publicación: finalidad, costos, inventario, destino y protocolo de entrega.",
+            programaCta: "health_care",
+          }}
         />
       </CuerpoInterno>
     </>
