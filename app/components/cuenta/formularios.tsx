@@ -185,6 +185,9 @@ export function FormularioRegistro() {
 
 // -------------------------------------------------------------------- entrar
 
+/** Segundos que se muestra el aviso antes de llevar a la otra puerta. */
+const ESPERA_REDIRECCION = 5;
+
 export function FormularioEntrar() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -192,6 +195,10 @@ export function FormularioEntrar() {
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
+  const [otraPuerta, setOtraPuerta] = useState<{
+    mensaje: string;
+    destino: string;
+  } | null>(null);
 
   async function enviar(evento: React.FormEvent) {
     evento.preventDefault();
@@ -202,10 +209,11 @@ export function FormularioEntrar() {
       router.push("/mi-cuenta");
       router.refresh();
     } catch (fallo) {
-      // Credenciales del equipo: no se equivocó de clave, sino de puerta.
+      // Credenciales del equipo: no se equivocó de clave, sino de puerta. Se
+      // explica antes de mover a nadie; un salto sin aviso parece un fallo.
       if (fallo instanceof PuertaEquivocada) {
-        setAviso(`${fallo.message} Un momento…`);
-        router.push(`${fallo.destino}?email=${encodeURIComponent(email)}`);
+        setOtraPuerta({ mensaje: fallo.message, destino: fallo.destino });
+        setEnviando(false);
         return;
       }
       setError(fallo instanceof Error ? fallo.message : "Error inesperado");
@@ -225,6 +233,15 @@ export function FormularioEntrar() {
     } catch {
       setError("No pudimos procesar el pedido. Intenta de nuevo.");
     }
+  }
+
+  if (otraPuerta) {
+    return (
+      <AvisoOtraPuerta
+        mensaje={otraPuerta.mensaje}
+        destino={`${otraPuerta.destino}?email=${encodeURIComponent(email)}`}
+      />
+    );
   }
 
   return (
@@ -290,6 +307,68 @@ export function FormularioEntrar() {
           el de la plataforma interna
         </Link>
         , y es una cuenta distinta de esta.
+      </p>
+    </Panel>
+  );
+}
+
+/**
+ * Aviso antes de llevar a la otra puerta.
+ *
+ * La cuenta atrás es visible a propósito: un cambio de página sin explicación
+ * se lee como un fallo, aunque el sistema esté haciendo justo lo correcto.
+ * Quien no quiera esperar tiene el botón; quien prefiera quedarse, también.
+ */
+function AvisoOtraPuerta({
+  mensaje,
+  destino,
+}: {
+  mensaje: string;
+  destino: string;
+}) {
+  const router = useRouter();
+  const [restante, setRestante] = useState(ESPERA_REDIRECCION);
+
+  useEffect(() => {
+    if (restante <= 0) {
+      router.push(destino);
+      return;
+    }
+    const temporizador = setTimeout(() => setRestante((n) => n - 1), 1000);
+    return () => clearTimeout(temporizador);
+  }, [restante, destino, router]);
+
+  return (
+    <Panel>
+      <h2 className="mb-3 font-montserrat text-xl font-bold text-verde-bosque">
+        Esta no es tu puerta
+      </h2>
+      <p className="mb-4 text-sm leading-relaxed text-gray-700">{mensaje}</p>
+      <p className="mb-6 text-sm leading-relaxed text-gray-600">
+        Tus credenciales son correctas: pertenecen a una cuenta del equipo, que
+        es distinta de la de aportantes. No tienes que volver a escribirlas,
+        solo entrar por la puerta que les corresponde.
+      </p>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <button
+          type="button"
+          onClick={() => router.push(destino)}
+          className="rounded-lg bg-verde-hoja px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-verde-bosque"
+        >
+          Ir a la plataforma interna
+        </button>
+        <span className="text-sm text-gray-500" aria-live="polite">
+          Te llevamos en {restante}…
+        </span>
+      </div>
+
+      <p className="mt-6 border-t border-gray-100 pt-4 text-xs text-gray-500">
+        ¿Querías una cuenta de aportante? Puedes{" "}
+        <Link href="/registro" className="font-semibold text-verde-hoja hover:underline">
+          crear una
+        </Link>{" "}
+        con este mismo correo; las dos conviven sin estorbarse.
       </p>
     </Panel>
   );
