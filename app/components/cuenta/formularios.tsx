@@ -273,6 +273,18 @@ export function FormularioEntrar() {
           Crear una
         </Link>
       </p>
+
+      {/* Orienta sin revelar qué cuentas existen: el mensaje de error tiene que
+          seguir siendo el mismo para todos, pero nadie debería quedarse
+          probando contraseñas en la puerta equivocada. */}
+      <p className="mt-4 border-t border-gray-100 pt-4 text-center text-xs text-gray-500">
+        Esta es la cuenta de aportantes. Si formas parte del equipo de
+        RaícesCare, tu acceso es{" "}
+        <Link href="/admin/entrar" className="font-semibold text-gray-600 hover:underline">
+          el de la plataforma interna
+        </Link>
+        , y es una cuenta distinta de esta.
+      </p>
     </Panel>
   );
 }

@@ -16,6 +16,16 @@ export default function Entrar() {
       />
       <CuerpoInterno>
         <EntrarForm />
+        <p className="text-center text-xs text-gray-500">
+          ¿Buscabas el historial de tus aportes? Esa es{" "}
+          <a
+            href="/cuenta/entrar"
+            className="font-semibold text-gray-600 hover:underline"
+          >
+            otra cuenta
+          </a>
+          .
+        </p>
       </CuerpoInterno>
     </>
   );
