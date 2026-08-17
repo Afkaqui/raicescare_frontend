@@ -185,9 +185,6 @@ export function FormularioRegistro() {
 
 // -------------------------------------------------------------------- entrar
 
-/** Segundos que se muestra el aviso antes de llevar a la otra puerta. */
-const ESPERA_REDIRECCION = 5;
-
 export function FormularioEntrar() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -313,11 +310,12 @@ export function FormularioEntrar() {
 }
 
 /**
- * Aviso antes de llevar a la otra puerta.
+ * Aviso cuando las credenciales pertenecen a la otra puerta.
  *
- * La cuenta atrás es visible a propósito: un cambio de página sin explicación
- * se lee como un fallo, aunque el sistema esté haciendo justo lo correcto.
- * Quien no quiera esperar tiene el botón; quien prefiera quedarse, también.
+ * No navega solo. Un cambio de página que ocurre sin que nadie lo pida se lee
+ * como un fallo, aunque el sistema esté acertando: la persona escribió algo
+ * correcto y la pantalla se le movió. Aquí se explica qué pasó y se espera a
+ * que decida.
  */
 function AvisoOtraPuerta({
   mensaje,
@@ -326,42 +324,28 @@ function AvisoOtraPuerta({
   mensaje: string;
   destino: string;
 }) {
-  const router = useRouter();
-  const [restante, setRestante] = useState(ESPERA_REDIRECCION);
-
-  useEffect(() => {
-    if (restante <= 0) {
-      router.push(destino);
-      return;
-    }
-    const temporizador = setTimeout(() => setRestante((n) => n - 1), 1000);
-    return () => clearTimeout(temporizador);
-  }, [restante, destino, router]);
-
   return (
     <Panel>
-      <h2 className="mb-3 font-montserrat text-xl font-bold text-verde-bosque">
-        Esta no es tu puerta
-      </h2>
-      <p className="mb-4 text-sm leading-relaxed text-gray-700">{mensaje}</p>
+      <div className="mb-5 rounded-lg border-l-4 border-verde-hoja bg-verde-hoja/5 p-4">
+        <h2 className="mb-1 font-montserrat text-lg font-bold text-verde-bosque">
+          Tus credenciales son correctas
+        </h2>
+        <p className="text-sm leading-relaxed text-gray-700">{mensaje}</p>
+      </div>
+
       <p className="mb-6 text-sm leading-relaxed text-gray-600">
-        Tus credenciales son correctas: pertenecen a una cuenta del equipo, que
-        es distinta de la de aportantes. No tienes que volver a escribirlas,
-        solo entrar por la puerta que les corresponde.
+        No hay ningún error: el equipo de RaícesCare y las personas que aportan
+        usan accesos distintos. Con esas mismas credenciales entrarás sin
+        problema en la plataforma interna, y no tendrás que volver a
+        escribirlas — te llevamos el correo puesto.
       </p>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <button
-          type="button"
-          onClick={() => router.push(destino)}
-          className="rounded-lg bg-verde-hoja px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-verde-bosque"
-        >
-          Ir a la plataforma interna
-        </button>
-        <span className="text-sm text-gray-500" aria-live="polite">
-          Te llevamos en {restante}…
-        </span>
-      </div>
+      <Link
+        href={destino}
+        className="inline-flex rounded-lg bg-verde-hoja px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-verde-bosque"
+      >
+        Ir a la plataforma interna
+      </Link>
 
       <p className="mt-6 border-t border-gray-100 pt-4 text-xs text-gray-500">
         ¿Querías una cuenta de aportante? Puedes{" "}
