@@ -177,6 +177,7 @@ export type Resumen = {
   porTipo: Record<string, number>;
   abiertos: number;
   sinAsignar: number;
+  aportesSinCompletar: number;
 };
 
 export type FilaBandeja = {

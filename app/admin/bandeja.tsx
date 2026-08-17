@@ -76,7 +76,11 @@ export function Bandeja() {
             etiqueta="En revisión"
             valor={resumen.porEstado.under_review ?? 0}
           />
-          <Contador etiqueta="Cerradas" valor={resumen.porEstado.closed ?? 0} />
+          <Contador
+            etiqueta="Aportes sin completar"
+            valor={resumen.aportesSinCompletar}
+            alerta={resumen.aportesSinCompletar > 0}
+          />
         </div>
       )}
 
@@ -109,6 +113,7 @@ export function Bandeja() {
             className="rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-verde-hoja"
           >
             <option value="abiertos">Sin resolver</option>
+            <option value="sin_completar">Aportes sin completar</option>
             <option value="">Todos los estados</option>
             {ESTADOS.map(([valor, etiqueta]) => (
               <option key={valor} value={valor}>
@@ -232,21 +237,32 @@ function Contador({
   etiqueta,
   valor,
   destacado,
+  alerta,
 }: {
   etiqueta: string;
   valor: number;
   destacado?: boolean;
+  /** Un aporte que no se completó merece mirarse, no solo contarse. */
+  alerta?: boolean;
 }) {
   return (
     <div
       className={`rounded-xl border bg-white p-4 shadow-sm ${
-        destacado ? "border-t-4 border-verde-hoja" : "border-gray-200"
+        alerta
+          ? "border-t-4 border-amber-500"
+          : destacado
+            ? "border-t-4 border-verde-hoja"
+            : "border-gray-200"
       }`}
     >
       <p className="text-xs font-semibold tracking-wide text-gray-500 uppercase">
         {etiqueta}
       </p>
-      <p className="mt-1 font-montserrat text-2xl font-bold text-verde-bosque">
+      <p
+        className={`mt-1 font-montserrat text-2xl font-bold ${
+          alerta && valor > 0 ? "text-amber-700" : "text-verde-bosque"
+        }`}
+      >
         {valor}
       </p>
     </div>

@@ -5,6 +5,7 @@ import {
   EncabezadoInterno,
 } from "../../components/pagina-interna";
 import { contactHref } from "../../site-config";
+import { AvisarRetorno } from "./avisar-retorno";
 
 export const metadata: Metadata = {
   title: "Gracias por tu aporte",
@@ -73,8 +74,14 @@ export default async function GraciasPorTuAporte({ searchParams }: Props) {
     estado?.pago?.status === "approved" ||
     estado?.suscripcion?.status === "authorized";
 
+  // Lo que se le dice a la API. «fallido» viene de la URL de retorno de
+  // MercadoPago; el resto se deduce de si el pago llegó a acreditarse.
+  const resultado = fallido ? "failure" : acreditado ? "success" : "pending";
+
   return (
     <>
+      {codigo && <AvisarRetorno codigo={codigo} resultado={resultado} />}
+
       <EncabezadoInterno
         titulo={
           fallido
