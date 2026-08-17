@@ -7,6 +7,7 @@ import {
   EncabezadoInterno,
   QueSePedira,
 } from "../components/pagina-interna";
+import { InvitacionCuenta } from "../components/cuenta/invitacion-cuenta";
 import { site } from "../site-config";
 
 export const metadata: Metadata = {
@@ -65,6 +66,8 @@ export default async function Aportes({ searchParams }: Props) {
             </p>
           </section>
         )}
+
+        <InvitacionCuenta />
 
         <div id="formulario">
           <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">

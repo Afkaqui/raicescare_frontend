@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { navLinks } from "../site-config";
+import { EnlaceCuenta } from "./cuenta/enlace-cuenta";
 import { UniversalCta } from "./cta/universal-cta";
 import { CloseIcon, MenuIcon } from "./icons";
 
@@ -51,6 +52,7 @@ export function SiteHeader() {
               </li>
             ))}
             <li>
+              <EnlaceCuenta />
               <UniversalCta
                 code="DONATE_ENTRY"
                 location="header"
@@ -96,6 +98,7 @@ export function SiteHeader() {
               </li>
             ))}
             <li className="px-6 pt-3">
+              <EnlaceCuenta compacto />
               <UniversalCta
                 code="DONATE_ENTRY"
                 location="header"
