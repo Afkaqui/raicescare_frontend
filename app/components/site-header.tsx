@@ -53,6 +53,10 @@ export function SiteHeader() {
             ))}
             <li>
               <EnlaceCuenta />
+            </li>
+            {/* Separado del resto: el botón de donar es la acción principal y
+                no debe leerse como un elemento más de la navegación. */}
+            <li className="ml-2">
               <UniversalCta
                 code="DONATE_ENTRY"
                 location="header"
@@ -97,8 +101,10 @@ export function SiteHeader() {
                 </Link>
               </li>
             ))}
-            <li className="px-6 pt-3">
+            <li>
               <EnlaceCuenta compacto />
+            </li>
+            <li className="mt-2 border-t border-gris-niebla px-6 pt-4">
               <UniversalCta
                 code="DONATE_ENTRY"
                 location="header"

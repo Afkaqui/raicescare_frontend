@@ -36,8 +36,8 @@ export function EnlaceCuenta({ compacto }: { compacto?: boolean }) {
   if (aportante === undefined) return null;
 
   const clases = compacto
-    ? "block py-2 text-sm font-semibold text-verde-bosque"
-    : "text-sm font-semibold text-verde-bosque transition hover:text-verde-hoja";
+    ? "block py-3 text-center hover:bg-gris-niebla"
+    : "whitespace-nowrap transition-colors hover:text-verde-hoja";
 
   if (aportante) {
     return (
