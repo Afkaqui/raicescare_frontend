@@ -1,12 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { API_BASE_URL } from "../../lib/cta/tracking";
 
 export function EntrarForm() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
+  const parametros = useSearchParams();
+  // Llega precargado cuando se viene redirigido desde la cuenta de aportantes.
+  const [email, setEmail] = useState(parametros.get("email") ?? "");
   const [clave, setClave] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState<string | null>(null);

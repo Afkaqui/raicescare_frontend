@@ -8,6 +8,22 @@ import { API_BASE_URL } from "./cta/tracking";
  * pueden confundirse en la base.
  */
 
+/**
+ * La API indica que esas credenciales pertenecen a otra puerta.
+ *
+ * Solo se emite cuando la contraseña resultó correcta contra la otra tabla, así
+ * que no revela qué cuentas existen: quien lo recibe ya conocía la clave.
+ */
+export class PuertaEquivocada extends Error {
+  constructor(
+    mensaje: string,
+    readonly destino: string,
+  ) {
+    super(mensaje);
+    this.name = "PuertaEquivocada";
+  }
+}
+
 export type Aportante = {
   id: string;
   email: string;
@@ -53,10 +69,15 @@ async function pedir<T>(ruta: string, opciones: RequestInit = {}): Promise<T> {
   if (!respuesta.ok) {
     const datos = (await respuesta.json().catch(() => null)) as {
       message?: string | { message?: string }[];
+      destino?: string;
     } | null;
     const mensaje = Array.isArray(datos?.message)
       ? (datos.message[0]?.message ?? "Petición rechazada")
       : (datos?.message ?? `Error ${respuesta.status}`);
+
+    if (respuesta.status === 409 && datos?.destino) {
+      throw new PuertaEquivocada(mensaje, datos.destino);
+    }
     throw new Error(mensaje);
   }
 

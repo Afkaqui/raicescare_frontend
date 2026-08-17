@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LARGO_MINIMO_CLAVE, cuenta } from "../../lib/cuenta";
+import { LARGO_MINIMO_CLAVE, PuertaEquivocada, cuenta } from "../../lib/cuenta";
 
 const entrada =
   "w-full rounded-lg border border-gray-300 px-4 py-3 text-sm text-gray-800 outline-none transition focus:border-verde-hoja focus:ring-2 focus:ring-verde-hoja/30";
@@ -202,6 +202,12 @@ export function FormularioEntrar() {
       router.push("/mi-cuenta");
       router.refresh();
     } catch (fallo) {
+      // Credenciales del equipo: no se equivocó de clave, sino de puerta.
+      if (fallo instanceof PuertaEquivocada) {
+        setAviso(`${fallo.message} Un momento…`);
+        router.push(`${fallo.destino}?email=${encodeURIComponent(email)}`);
+        return;
+      }
       setError(fallo instanceof Error ? fallo.message : "Error inesperado");
       setEnviando(false);
     }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { CuerpoInterno, EncabezadoInterno } from "../../components/pagina-interna";
 import { EntrarForm } from "./entrar-form";
 
@@ -15,7 +16,9 @@ export default function Entrar() {
         descripcion="Plataforma de gestión de RaícesCare. El acceso es solo para cuentas autorizadas."
       />
       <CuerpoInterno>
-        <EntrarForm />
+        <Suspense fallback={<p className="text-gray-600">Cargando…</p>}>
+          <EntrarForm />
+        </Suspense>
         <p className="text-center text-xs text-gray-500">
           ¿Buscabas el historial de tus aportes? Esa es{" "}
           <a
