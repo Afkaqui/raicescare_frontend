@@ -142,14 +142,10 @@ export function SiteFooter() {
       </div>
 
       <div className="mx-auto max-w-7xl border-t border-gray-600/50 pt-8 text-center text-xs text-gray-400">
-        {/* Una sola línea. Que sea una asociación sin fines de lucro ya lo dice
-            la columna de arriba, y las sedes están en la de contacto; el detalle
-            registral completo vive en transparencia, que es donde se consulta. */}
-        <p>
-          © 2026 {site.legalName} · Partida Registral N.°{" "}
-          {site.partidaRegistral} · RUC N.° {site.ruc} · Todos los derechos
-          reservados.
-        </p>
+        {/* Solo el aviso de derechos. El detalle registral vive en
+            transparencia, que es adonde va quien quiere verificarlo, y en los
+            datos estructurados que leen los buscadores. */}
+        <p>© 2026 {site.legalName}. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
