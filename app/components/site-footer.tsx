@@ -142,13 +142,14 @@ export function SiteFooter() {
       </div>
 
       <div className="mx-auto max-w-7xl border-t border-gray-600/50 pt-8 text-center text-xs text-gray-400">
-        <p className="mx-auto mb-4 max-w-4xl leading-relaxed">
-          {site.legalName} es una {site.tipoLegal.toLowerCase()} constituida en
-          el Perú, inscrita en SUNARP con Partida Registral N.°{" "}
-          {site.partidaRegistral} ({site.zonaRegistral}) y con RUC N.°{" "}
-          {site.ruc}. Pucallpa, Ucayali, Perú.
+        {/* Una sola línea. Que sea una asociación sin fines de lucro ya lo dice
+            la columna de arriba, y las sedes están en la de contacto; el detalle
+            registral completo vive en transparencia, que es donde se consulta. */}
+        <p>
+          © 2026 {site.legalName} · Partida Registral N.°{" "}
+          {site.partidaRegistral} · RUC N.° {site.ruc} · Todos los derechos
+          reservados.
         </p>
-        <p>© 2026 {site.legalName}. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
