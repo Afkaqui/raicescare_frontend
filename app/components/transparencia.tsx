@@ -2,6 +2,7 @@ import Image from "next/image";
 import { UniversalCta } from "./cta/universal-cta";
 import { contactHref, site } from "../site-config";
 import { BuildingIcon, DocumentIcon, LockIcon, ScaleIcon } from "./icons";
+import Link from "next/link";
 
 /**
  * Auditoría de textos (Ventana 17): el módulo de trazabilidad se presenta como
@@ -238,12 +239,12 @@ export function Transparencia() {
               </div>
               <div className="mt-auto flex flex-col gap-2">
                 <EstadoDocumento />
-                <a
-                  href={contactHref("Solicito las políticas institucionales")}
+                <Link
+                  href="/politicas"
                   className="inline-flex items-center gap-1 text-sm font-bold text-verde-hoja hover:underline"
                 >
                   Consultar políticas institucionales
-                </a>
+                </Link>
               </div>
               </div>
             </article>

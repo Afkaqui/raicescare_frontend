@@ -6,6 +6,7 @@ import { UniversalCta } from "./cta/universal-cta";
 import type { FunctionalCtaCode } from "../lib/cta/registry";
 import { contactHref, site } from "../site-config";
 import { LockIcon, RefreshIcon, BoltIcon } from "./icons";
+import Link from "next/link";
 
 type PlanProps = {
   imagen: string;
@@ -163,13 +164,13 @@ export function Donar() {
             Los datos personales serán tratados únicamente para gestionar el
             aporte, cumplir obligaciones administrativas y enviar comunicaciones
             autorizadas, conforme a la Ley peruana de Protección de Datos
-            Personales. Puedes solicitar nuestra{" "}
-            <a
-              href={contactHref("Solicito la Política de Privacidad")}
+            Personales. Puedes leer nuestra{" "}
+            <Link
+              href="/politicas/privacidad"
               className="font-semibold text-white underline underline-offset-2"
             >
               Política de Privacidad
-            </a>
+            </Link>
             . Para coordinar cuentas institucionales, escríbenos al{" "}
             <a
               href={contactHref("Consulta sobre medios de aporte")}

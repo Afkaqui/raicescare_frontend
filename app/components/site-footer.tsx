@@ -138,8 +138,8 @@ export function SiteFooter() {
             </li>
           </ul>
           <p className="mt-4 text-xs text-gray-400">
-            Los documentos de política se encuentran en elaboración; solicítalos
-            al correo institucional mientras se publican.
+            Publicados como borradores y pendientes de revisión legal. Cada
+            documento lo indica en su primera línea.
           </p>
         </div>
       </div>
