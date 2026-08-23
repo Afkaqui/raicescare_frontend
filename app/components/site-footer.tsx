@@ -37,9 +37,6 @@ export function SiteFooter() {
             educación, investigación aplicada y cooperación para comunidades y
             territorios amazónicos.
           </p>
-          <p className="mt-4 text-sm text-gray-300">
-            Partida Registral N.° {site.partidaRegistral} · RUC N.° {site.ruc}
-          </p>
         </div>
 
         <div>

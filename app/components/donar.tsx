@@ -157,8 +157,7 @@ export function Donar() {
           <p className="mb-3 leading-relaxed">
             {site.legalName} registra las contribuciones recibidas y aplica
             controles documentales conforme a sus procedimientos internos y a
-            las obligaciones legales aplicables. Partida Registral N.°{" "}
-            {site.partidaRegistral} · RUC N.° {site.ruc}.
+            las obligaciones legales aplicables.
           </p>
           <p className="leading-relaxed text-gray-300">
             Los datos personales serán tratados únicamente para gestionar el

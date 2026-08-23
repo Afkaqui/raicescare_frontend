@@ -100,8 +100,7 @@ export default async function Aportes({ searchParams }: Props) {
           <p className="mb-3">
             {site.legalName} registra las contribuciones recibidas y aplica
             controles documentales conforme a sus procedimientos internos y a
-            las obligaciones legales aplicables. Partida Registral N.°{" "}
-            {site.partidaRegistral} · RUC N.° {site.ruc}.
+            las obligaciones legales aplicables.
           </p>
           <p className="mb-3">
             El pago se procesa íntegramente en el entorno de MercadoPago.
