@@ -48,6 +48,8 @@ export function Editor({
           endsOn: existente.endsOn?.slice(0, 10),
           goalAmount: existente.goalAmount ? Number(existente.goalAmount) : undefined,
           goalCurrency: existente.goalCurrency ?? undefined,
+          offlineAmount: existente.offlineAmount ? Number(existente.offlineAmount) : undefined,
+          offlineContributors: existente.offlineContributors ?? undefined,
           coverMediaId: existente.coverMediaId ?? undefined,
           status: existente.status,
         }
@@ -124,6 +126,8 @@ export function Editor({
       endsOn: datos.endsOn || undefined,
       goalAmount: datos.goalAmount || undefined,
       goalCurrency: datos.goalAmount ? (datos.goalCurrency ?? "PEN") : undefined,
+      offlineAmount: datos.offlineAmount ?? undefined,
+      offlineContributors: datos.offlineContributors ?? undefined,
       coverMediaId: datos.coverMediaId || undefined,
     };
 
@@ -315,6 +319,51 @@ export function Editor({
                 </Campo>
               </div>
             )}
+
+            {datos.kind === "campaign" && datos.goalAmount ? (
+              <div className="space-y-2 rounded-lg border border-dashed border-gray-300 p-4">
+                <p className="text-sm font-semibold text-azul-confianza">
+                  Recaudado fuera de la web
+                </p>
+                <p className="text-xs leading-relaxed text-gray-600">
+                  Transferencias, Yape directo y gastos cubiertos en especie. Escribe
+                  el total acumulado, no lo de hoy: se suma a los aportes en línea
+                  en la barra de avance pública.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Campo etiqueta={`Monto acumulado (${datos.goalCurrency === "USD" ? "US$" : "S/"})`}>
+                    <input
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={datos.offlineAmount ?? ""}
+                      onChange={(e) =>
+                        actualizar(
+                          "offlineAmount",
+                          e.target.value ? Number(e.target.value) : undefined,
+                        )
+                      }
+                      className={entrada}
+                    />
+                  </Campo>
+                  <Campo etiqueta="Número de aportantes">
+                    <input
+                      type="number"
+                      min={0}
+                      step="1"
+                      value={datos.offlineContributors ?? ""}
+                      onChange={(e) =>
+                        actualizar(
+                          "offlineContributors",
+                          e.target.value ? Number(e.target.value) : undefined,
+                        )
+                      }
+                      className={entrada}
+                    />
+                  </Campo>
+                </div>
+              </div>
+            ) : null}
           </Tarjeta>
         </div>
 

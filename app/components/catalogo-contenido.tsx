@@ -21,14 +21,19 @@ export async function CatalogoContenido({
   kind,
   programa,
   vacio,
+  titulo,
 }: {
   kind: "campaign" | "initiative" | "project";
   programa?: string;
-  vacio: { titulo: string; descripcion: string; programaCta: string };
+  /** Sin estado vacío, el catálogo desaparece cuando no hay nada publicado. */
+  vacio?: { titulo: string; descripcion: string; programaCta: string };
+  /** Encabezado que solo se muestra si hay algo que listar. */
+  titulo?: string;
 }) {
   const items = await listarContenido(kind, programa);
 
   if (items.length === 0) {
+    if (!vacio) return null;
     return (
       <CatalogoVacio
         titulo={vacio.titulo}
@@ -38,7 +43,7 @@ export async function CatalogoContenido({
     );
   }
 
-  return (
+  const lista = (
     <ul className="grid grid-cols-1 gap-6 md:grid-cols-2">
       {items.map((item) => (
         <li key={item.slug}>
@@ -46,6 +51,17 @@ export async function CatalogoContenido({
         </li>
       ))}
     </ul>
+  );
+
+  if (!titulo) return lista;
+
+  return (
+    <section>
+      <h2 className="mb-4 font-montserrat text-2xl font-bold text-verde-bosque">
+        {titulo}
+      </h2>
+      {lista}
+    </section>
   );
 }
 

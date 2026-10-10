@@ -115,3 +115,50 @@ export function fecha(valor: string): string {
 export function urlAbsoluta(ruta: string): string {
   return `${siteUrl}${ruta}`;
 }
+
+export type Avance = {
+  slug: string;
+  meta: number | null;
+  moneda: string;
+  recaudado: number;
+  aportantes: number;
+  cierre: string | null;
+};
+
+/**
+ * Avance de una campaña. Se revalida más seguido que el contenido: en una
+ * campaña de pocos días, quien aporta quiere ver su aporte reflejado pronto.
+ */
+export async function obtenerAvance(slug: string): Promise<Avance | null> {
+  if (!API) return null;
+
+  try {
+    const respuesta = await fetch(
+      `${API}/api/v1/content/campaign/${encodeURIComponent(slug)}/progress`,
+      { next: { revalidate: 30 } },
+    );
+    if (!respuesta.ok) return null;
+    return (await respuesta.json()) as Avance;
+  } catch {
+    return null;
+  }
+}
+
+/** Día de hoy en Lima, como AAAA-MM-DD: así se comparan las fechas de cierre. */
+function hoyEnLima(): string {
+  return new Date().toLocaleDateString("en-CA", { timeZone: "America/Lima" });
+}
+
+/**
+ * Campañas a las que todavía se puede aportar: publicadas y sin cerrar. El
+ * cierre es inclusivo, porque una campaña que cierra el jueves recibe aportes
+ * todo el jueves.
+ */
+export async function campanasAbiertas(): Promise<Contenido[]> {
+  const hoy = hoyEnLima();
+  const campanas = await listarContenido("campaign");
+  return campanas.filter((c) => !c.endsOn || c.endsOn.slice(0, 10) >= hoy);
+}
+
+/** Valor del campo `destino` del formulario de aportes para una campaña. */
+export const destinoDeCampana = (slug: string) => `campana:${slug}`;

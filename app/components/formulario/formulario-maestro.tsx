@@ -39,9 +39,14 @@ export function FormularioMaestro({
       for (const campo of paso.campos) {
         if (campo.desdeParametro) {
           const valor = parametros.get(campo.desdeParametro);
-          const admitido = campo.opciones?.some(
-            (opcion) => opcion.valor === valor,
-          );
+          // En un monto las opciones son atajos, no una lista cerrada: vale
+          // cualquier importe dentro del rango.
+          const admitido =
+            campo.tipo === "monto"
+              ? Number(valor) > 0 &&
+                (campo.minimo === undefined || Number(valor) >= campo.minimo) &&
+                (campo.maximo === undefined || Number(valor) <= campo.maximo)
+              : campo.opciones?.some((opcion) => opcion.valor === valor);
           if (valor && (admitido || !campo.opciones)) iniciales[campo.nombre] = valor;
         }
       }

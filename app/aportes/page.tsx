@@ -9,6 +9,12 @@ import {
 } from "../components/pagina-interna";
 import { InvitacionCuenta } from "../components/cuenta/invitacion-cuenta";
 import { site } from "../site-config";
+import {
+  campanasAbiertas,
+  destinoDeCampana,
+  type Contenido,
+} from "../lib/contenido";
+import type { DefinicionFormulario } from "../lib/formularios/tipos";
 
 export const metadata: Metadata = {
   title: "Apoya nuestras iniciativas",
@@ -36,11 +42,47 @@ const MODALIDADES = {
   },
 } as const;
 
+/**
+ * Las campañas abiertas aparecen como destino posible del aporte. Así quien
+ * llega desde una campaña la encuentra ya elegida, y quien llega por su cuenta
+ * puede elegirla sin conocer el enlace.
+ */
+function conCampanas(campanas: Contenido[]): DefinicionFormulario {
+  if (campanas.length === 0) return FORMULARIO_APORTE;
+
+  return {
+    ...FORMULARIO_APORTE,
+    pasos: FORMULARIO_APORTE.pasos.map((paso) => ({
+      ...paso,
+      campos: paso.campos.map((campo) =>
+        campo.nombre === "destino"
+          ? {
+              ...campo,
+              opciones: [
+                ...campanas.map((c) => ({
+                  valor: destinoDeCampana(c.slug),
+                  etiqueta: `Campaña: ${c.title}`,
+                })),
+                ...(campo.opciones ?? []),
+              ],
+            }
+          : campo,
+      ),
+    })),
+  };
+}
+
 export default async function Aportes({ searchParams }: Props) {
   const params = await searchParams;
   const tipo = typeof params.type === "string" ? params.type : null;
   const modalidad =
     tipo === "recurring" || tipo === "single" ? MODALIDADES[tipo] : null;
+
+  const campanas = await campanasAbiertas();
+  const destino = typeof params.destino === "string" ? params.destino : null;
+  const campanaElegida = campanas.find(
+    (c) => destinoDeCampana(c.slug) === destino,
+  );
 
   return (
     <>
@@ -67,6 +109,21 @@ export default async function Aportes({ searchParams }: Props) {
           </section>
         )}
 
+        {campanaElegida && (
+          <section className="rounded-xl border-l-4 border-amber-500 bg-white p-6 shadow-sm">
+            <p className="mb-1 text-xs font-bold tracking-wide text-amber-700 uppercase">
+              Tu aporte va a la campaña
+            </p>
+            <h2 className="font-montserrat text-xl font-bold text-verde-bosque">
+              {campanaElegida.title}
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-gray-700">
+              Ya está elegida en el formulario. Lo que aportes se suma a su
+              barra de avance.
+            </p>
+          </section>
+        )}
+
         <InvitacionCuenta />
 
         <div id="formulario">
@@ -76,7 +133,7 @@ export default async function Aportes({ searchParams }: Props) {
           <Suspense
             fallback={<p className="text-gray-600">Cargando formulario…</p>}
           >
-            <FormularioMaestro definicion={FORMULARIO_APORTE} />
+            <FormularioMaestro definicion={conCampanas(campanas)} />
           </Suspense>
         </div>
 

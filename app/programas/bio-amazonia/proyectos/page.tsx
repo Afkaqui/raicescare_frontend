@@ -25,6 +25,14 @@ export default function ProyectosBioAmazonia() {
       />
 
       <CuerpoInterno>
+        {/* Las campañas del programa van primero: tienen plazo, los
+            proyectos no. Si no hay ninguna, la sección no aparece. */}
+        <CatalogoContenido
+          kind="campaign"
+          programa="bioamazonia"
+          titulo="Campañas"
+        />
+
         <CatalogoContenido
           kind="project"
           programa="bioamazonia"

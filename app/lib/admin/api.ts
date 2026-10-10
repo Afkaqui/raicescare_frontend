@@ -91,6 +91,8 @@ export type Contenido = {
   endsOn: string | null;
   goalAmount: string | null;
   goalCurrency: string | null;
+  offlineAmount: string | null;
+  offlineContributors: number | null;
   coverMediaId: string | null;
   status: string;
   publishedAt: string | null;
@@ -110,6 +112,8 @@ export type ContenidoForm = {
   endsOn?: string;
   goalAmount?: number;
   goalCurrency?: string;
+  offlineAmount?: number;
+  offlineContributors?: number;
   coverMediaId?: string;
   status: string;
 };

@@ -519,6 +519,7 @@ export const FORMULARIO_APORTE: DefinicionFormulario = {
           etiqueta: "Moneda",
           tipo: "select",
           requerido: true,
+          desdeParametro: "moneda",
           ayuda: "Los aportes desde el exterior pueden hacerse en dólares.",
           opciones: [
             { valor: "PEN", etiqueta: "Soles (S/)" },
@@ -532,6 +533,7 @@ export const FORMULARIO_APORTE: DefinicionFormulario = {
           requerido: true,
           minimo: 5,
           maximo: 50000,
+          desdeParametro: "monto",
           ayuda: "Elige un monto sugerido o escribe el tuyo.",
           opciones: [
             { valor: "20", etiqueta: "S/ 20" },
@@ -552,6 +554,9 @@ export const FORMULARIO_APORTE: DefinicionFormulario = {
           etiqueta: "¿A qué deseas destinarlo?",
           tipo: "select",
           requerido: true,
+          // Las campañas activas se suman a estas opciones en la página de
+          // aportes; una campaña enlaza aquí con su destino ya elegido.
+          desdeParametro: "destino",
           opciones: [
             { valor: "general", etiqueta: "Donde más se necesite" },
             { valor: "salud", etiqueta: "Raíces de Salud y Cuidado" },
