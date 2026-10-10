@@ -138,6 +138,9 @@ export function fechaAporte(valor: string): string {
     day: "2-digit",
     month: "long",
     year: "numeric",
+    // Hora de Lima fija, no la del navegador: así la fecha coincide con la
+    // que muestran las páginas que se generan en el servidor.
+    timeZone: "America/Lima",
   });
 }
 

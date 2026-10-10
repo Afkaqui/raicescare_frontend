@@ -328,6 +328,9 @@ export function fechaCorta(valor: string): string {
     day: "2-digit",
     month: "short",
     year: "numeric",
+    // Hora de Lima fija, no la del navegador: así la fecha coincide con la
+    // que muestran las páginas que se generan en el servidor.
+    timeZone: "America/Lima",
   });
 }
 
@@ -336,6 +339,9 @@ export function fechaHora(valor: string): string {
     day: "2-digit",
     month: "short",
     year: "numeric",
+    // Hora de Lima fija, no la del navegador: así la fecha coincide con la
+    // que muestran las páginas que se generan en el servidor.
+    timeZone: "America/Lima",
     hour: "2-digit",
     minute: "2-digit",
   });

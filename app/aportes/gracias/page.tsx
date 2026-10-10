@@ -45,6 +45,9 @@ function fecha(valor: string) {
     day: "2-digit",
     month: "long",
     year: "numeric",
+    // El servidor de Vercel corre en UTC: sin esto, un pago de la noche
+    // peruana aparece con la fecha del día siguiente.
+    timeZone: "America/Lima",
   });
 }
 
