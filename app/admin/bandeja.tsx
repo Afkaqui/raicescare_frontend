@@ -69,17 +69,32 @@ export function Bandeja() {
   return (
     <div className="space-y-6">
       {resumen && (
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-          <Contador etiqueta="Sin resolver" valor={resumen.abiertos} destacado />
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
+          <Contador
+            etiqueta="Sin resolver"
+            valor={resumen.abiertos}
+            destacado
+            alPulsar={() => cambiarFiltro(() => setEstado("abiertos"))}
+          />
           <Contador etiqueta="Sin asignar" valor={resumen.sinAsignar} />
           <Contador
             etiqueta="En revisión"
             valor={resumen.porEstado.under_review ?? 0}
+            alPulsar={() => cambiarFiltro(() => setEstado("under_review"))}
           />
           <Contador
             etiqueta="Aportes sin completar"
             valor={resumen.aportesSinCompletar}
             alerta={resumen.aportesSinCompletar > 0}
+            alPulsar={() => cambiarFiltro(() => setEstado("sin_completar"))}
+          />
+          <Contador
+            etiqueta="Aportes acreditados"
+            valor={resumen.aportesAcreditados.cantidad}
+            detalle={resumen.aportesAcreditados.importes
+              .map((fila) => importe(fila.total, fila.moneda))
+              .join(" · ")}
+            alPulsar={() => cambiarFiltro(() => setEstado("acreditados"))}
           />
         </div>
       )}
@@ -114,6 +129,7 @@ export function Bandeja() {
           >
             <option value="abiertos">Sin resolver</option>
             <option value="sin_completar">Aportes sin completar</option>
+            <option value="acreditados">Aportes acreditados</option>
             <option value="">Todos los estados</option>
             {ESTADOS.map(([valor, etiqueta]) => (
               <option key={valor} value={valor}>
@@ -238,16 +254,27 @@ function Contador({
   valor,
   destacado,
   alerta,
+  detalle,
+  alPulsar,
 }: {
   etiqueta: string;
   valor: number;
   destacado?: boolean;
   /** Un aporte que no se completó merece mirarse, no solo contarse. */
   alerta?: boolean;
+  detalle?: string;
+  /** Si se indica, la tarjeta filtra la tabla con lo que cuenta. */
+  alPulsar?: () => void;
 }) {
+  const Elemento = alPulsar ? "button" : "div";
+
   return (
-    <div
-      className={`rounded-xl border bg-white p-4 shadow-sm ${
+    <Elemento
+      type={alPulsar ? "button" : undefined}
+      onClick={alPulsar}
+      className={`rounded-xl border bg-white p-4 text-left shadow-sm ${
+        alPulsar ? "transition hover:shadow-md" : ""
+      } ${
         alerta
           ? "border-t-4 border-amber-500"
           : destacado
@@ -265,7 +292,8 @@ function Contador({
       >
         {valor}
       </p>
-    </div>
+      {detalle && <p className="mt-0.5 text-sm text-gray-600">{detalle}</p>}
+    </Elemento>
   );
 }
 

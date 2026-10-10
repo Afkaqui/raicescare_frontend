@@ -178,6 +178,10 @@ export type Resumen = {
   abiertos: number;
   sinAsignar: number;
   aportesSinCompletar: number;
+  aportesAcreditados: {
+    cantidad: number;
+    importes: { moneda: string; total: string }[];
+  };
 };
 
 export type FilaBandeja = {
