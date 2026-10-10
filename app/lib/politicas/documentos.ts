@@ -12,6 +12,8 @@
  * Datos Personales e inscripción de bancos de datos.
  */
 
+import { site } from "../../site-config";
+
 export const VERSION_DOCUMENTOS = "v1-borrador-2026-08";
 export const FECHA_ACTUALIZACION = "9 de agosto de 2026";
 
@@ -35,7 +37,7 @@ const IDENTIFICACION: Seccion = {
   titulo: "Quién trata tus datos",
   parrafos: [
     "La Asociación RaícesCare, asociación civil sin fines de lucro con RUC N.° 20616229371 y Partida Registral N.° 11241934, con domicilio legal en Calle Puerto de Palos 160, San Isidro, Lima, Perú, y sede operativa en Calle San Martín 1037, Callería, Pucallpa, Ucayali, es responsable del tratamiento de los datos personales que se recogen a través de este sitio.",
-    "Para cualquier asunto relacionado con tus datos personales puedes escribir a raicescare.de@gmail.com indicando en el asunto el derecho que deseas ejercer.",
+    `Para cualquier asunto relacionado con tus datos personales puedes escribir a ${site.email} indicando en el asunto el derecho que deseas ejercer.`,
   ],
   aviso:
     "POR DEFINIR: si la organización queda obligada a designar un Oficial de Datos Personales conforme al D.S. 016-2024-JUS, sus datos de contacto deben publicarse en esta sección.",
@@ -153,7 +155,7 @@ export const DOCUMENTOS: Documento[] = [
         titulo: "Tus derechos",
         parrafos: [
           "Puedes ejercer en cualquier momento los derechos de acceso, rectificación, cancelación y oposición —conocidos como derechos ARCO—, así como los derechos a la información, a la portabilidad de tus datos y a revocar el consentimiento que nos diste. Revocar el consentimiento no afecta la licitud del tratamiento anterior.",
-          "Escríbenos a raicescare.de@gmail.com indicando qué derecho ejerces y adjuntando algo que permita verificar tu identidad. Si tienes un código de seguimiento, inclúyelo: acelera la búsqueda.",
+          `Escríbenos a ${site.email} indicando qué derecho ejerces y adjuntando algo que permita verificar tu identidad. Si tienes un código de seguimiento, inclúyelo: acelera la búsqueda.`,
           "Los plazos legales para responderte son de veinte días hábiles para el derecho de acceso y de diez días hábiles para rectificación, cancelación y oposición, contados desde el día siguiente a tu solicitud. Pueden ampliarse una sola vez por un plazo igual cuando las circunstancias lo justifiquen, avisándote antes.",
           "Si no te respondemos en plazo o no estás conforme con la respuesta, puedes presentar un reclamo ante la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y Derechos Humanos.",
         ],
@@ -229,7 +231,7 @@ export const DOCUMENTOS: Documento[] = [
       {
         titulo: "Cómo retirar el consentimiento",
         parrafos: [
-          "Escríbenos a raicescare.de@gmail.com. El retiro surte efecto hacia adelante: dejamos de tratar tus datos para la finalidad que revocaste, sin que ello afecte lo hecho legítimamente antes.",
+          `Escríbenos a ${site.email}. El retiro surte efecto hacia adelante: dejamos de tratar tus datos para la finalidad que revocaste, sin que ello afecte lo hecho legítimamente antes.`,
           "Ten en cuenta que retirar el consentimiento de tratamiento puede impedirnos continuar con una solicitud en curso, porque sin esos datos no hay forma de atenderla. Si eso ocurre, te lo diremos antes de proceder.",
         ],
       },
@@ -432,7 +434,7 @@ export const DOCUMENTOS: Documento[] = [
       {
         titulo: "Cómo lo tratamos",
         parrafos: [
-          "Escríbenos a raicescare.de@gmail.com. Toda comunicación recibe acuse y se registra con un código de seguimiento.",
+          `Escríbenos a ${site.email}. Toda comunicación recibe acuse y se registra con un código de seguimiento.`,
           "Puedes plantear una denuncia de forma anónima. Si lo haces, ten en cuenta que sin un medio de contacto no podremos pedirte precisiones ni comunicarte el resultado.",
           "Cuando te identifiques, tu identidad se trata de forma reservada y solo se comparte con quienes deban intervenir para investigar los hechos.",
         ],

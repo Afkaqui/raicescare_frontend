@@ -20,7 +20,7 @@ export const site = {
   tagline: "Ciencia, cuidado y cooperación para la Amazonía y el Perú.",
   description:
     "RaícesCare es una asociación civil sin fines de lucro constituida en el Perú. Articulamos asistencia social, educación, investigación aplicada y cooperación institucional para desarrollar iniciativas orientadas al bienestar de las comunidades y al cuidado de los ecosistemas amazónicos.",
-  email: "raicescare.de@gmail.com",
+  email: "direccion.ejecutiva@raicescare.earth",
   linkedin: "https://www.linkedin.com/company/ra%C3%ADcescare-ongd",
   sedeOperativa: "Calle San Martín 1037, Callería, Pucallpa, Ucayali, Perú.",
   sedeLegal: "Calle Puerto de Palos 160, San Isidro, Lima, Perú.",
