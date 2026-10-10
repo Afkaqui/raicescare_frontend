@@ -8,6 +8,7 @@ import {
   QueSePedira,
 } from "../components/pagina-interna";
 import { InvitacionCuenta } from "../components/cuenta/invitacion-cuenta";
+import { AvisoCuentaAsociacion } from "./aviso-cuenta-asociacion";
 import { site } from "../site-config";
 import {
   campanasAbiertas,
@@ -123,6 +124,8 @@ export default async function Aportes({ searchParams }: Props) {
             </p>
           </section>
         )}
+
+        <AvisoCuentaAsociacion />
 
         <InvitacionCuenta />
 
